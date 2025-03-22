@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
@@ -13,11 +12,11 @@ import {
   Plus, 
   ChevronRight 
 } from 'lucide-react';
+import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 
-// Mock product data - same as in Products.tsx
 const allProducts = [
   {
     id: 1,
@@ -80,7 +79,6 @@ What's in the box: 4 bamboo toothbrushes in different colors (natural, blue, gre
       { id: 3, user: "Vikram S.", rating: 5, comment: "Our whole family has switched to these. I love that we're reducing our plastic consumption.", date: "2023-08-11" },
     ],
   },
-  // You can add the rest of the product details for other products
 ];
 
 const ProductDetail = () => {
@@ -92,14 +90,12 @@ const ProductDetail = () => {
   const [isImageZoomed, setIsImageZoomed] = useState(false);
   
   useEffect(() => {
-    // Find the product with the matching ID
     const productId = parseInt(id || "0");
     const foundProduct = allProducts.find(p => p.id === productId);
     
     if (foundProduct) {
       setProduct(foundProduct);
       
-      // Find related products in the same category
       const related = allProducts
         .filter(p => p.category === foundProduct.category && p.id !== foundProduct.id)
         .slice(0, 4);
@@ -117,6 +113,38 @@ const ProductDetail = () => {
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
     }
+  };
+  
+  const handleAddToCart = () => {
+    if (!product) return;
+    
+    const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    
+    const existingItemIndex = existingCartItems.findIndex((item: any) => item.id === product.id);
+    
+    if (existingItemIndex !== -1) {
+      existingCartItems[existingItemIndex].quantity += quantity;
+      toast.success(`Updated ${product.name} quantity in cart`, {
+        description: `New quantity: ${existingCartItems[existingItemIndex].quantity}`,
+      });
+    } else {
+      existingCartItems.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: quantity,
+        imageSrc: product.imageSrc,
+      });
+      toast.success(`${product.name} added to cart successfully!`, {
+        description: `${quantity} × ₹${product.price.toLocaleString()} added to your cart`,
+        action: {
+          label: "View Cart",
+          onClick: () => window.location.href = '/cart'
+        },
+      });
+    }
+    
+    localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
   };
   
   if (!product) {
@@ -139,7 +167,6 @@ const ProductDetail = () => {
       <Navbar />
       
       <div className="pt-20 animate-fade-in">
-        {/* Breadcrumbs */}
         <div className="bg-earth-light py-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex" aria-label="Breadcrumb">
@@ -171,7 +198,6 @@ const ProductDetail = () => {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Product Images */}
             <div>
               <div 
                 className={`relative rounded-xl overflow-hidden bg-white border border-muted ${
@@ -205,7 +231,6 @@ const ProductDetail = () => {
               </div>
             </div>
             
-            {/* Product Info */}
             <div className="animate-slide-up">
               <div className="mb-2">
                 <span className="text-sm text-muted-foreground font-medium">
@@ -240,7 +265,6 @@ const ProductDetail = () => {
               </p>
               
               <div className="flex flex-col space-y-6 mb-8">
-                {/* Quantity selector */}
                 <div>
                   <label htmlFor="quantity" className="block text-sm font-medium mb-2">
                     Quantity
@@ -265,9 +289,11 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 
-                {/* Action buttons */}
                 <div className="flex flex-wrap gap-4">
-                  <button className="btn-primary flex items-center">
+                  <button 
+                    className="btn-primary flex items-center"
+                    onClick={handleAddToCart}
+                  >
                     <ShoppingCart className="h-5 w-5 mr-2" />
                     Add to Cart
                   </button>
@@ -282,7 +308,6 @@ const ProductDetail = () => {
                 </div>
               </div>
               
-              {/* Product highlights */}
               <div className="border-t border-border pt-6 space-y-4">
                 <div className="flex items-start">
                   <Truck className="h-5 w-5 text-primary mr-3 mt-0.5" />
@@ -315,7 +340,6 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Product Details Tabs */}
           <div className="mt-16">
             <div className="border-b border-border">
               <div className="flex flex-wrap -mb-px">
@@ -469,7 +493,6 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div className="mt-16">
               <h2 className="text-2xl font-display font-bold mb-8">You May Also Like</h2>

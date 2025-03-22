@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -13,88 +12,83 @@ import {
   ShieldCheck,
   Lock
 } from 'lucide-react';
+import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-// Sample cart items
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Organic Turmeric Powder",
-    price: 199,
-    quantity: 2,
-    imageSrc: "https://images.unsplash.com/photo-1615485500704-8e990f9900e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 2,
-    name: "Bamboo Toothbrush Set",
-    price: 249,
-    quantity: 1,
-    imageSrc: "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 3,
-    name: "Organic Coconut Oil",
-    price: 349,
-    quantity: 1,
-    imageSrc: "https://images.unsplash.com/photo-1594373505583-89a04f1e2dcd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-  },
-];
-
 const Cart = () => {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const [cartItems, setCartItems] = useState<any[]>([]);
   const [couponCode, setCouponCode] = useState('');
   const [couponApplied, setCouponApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
   
   useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    setCartItems(storedCartItems);
+    
     window.scrollTo(0, 0);
   }, []);
   
   const updateQuantity = (id: number, delta: number) => {
-    setCartItems(prevItems => 
-      prevItems.map(item => 
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
+    const updatedItems = cartItems.map(item => 
+      item.id === id
+        ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+        : item
     );
+    
+    setCartItems(updatedItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+    
+    const item = cartItems.find(item => item.id === id);
+    if (item && delta > 0) {
+      toast.success(`Increased ${item.name} quantity`);
+    } else if (item && delta < 0) {
+      toast.success(`Decreased ${item.name} quantity`);
+    }
   };
   
   const removeItem = (id: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+    const itemToRemove = cartItems.find(item => item.id === id);
+    const updatedItems = cartItems.filter(item => item.id !== id);
+    
+    setCartItems(updatedItems);
+    localStorage.setItem('cartItems', JSON.stringify(updatedItems));
+    
+    if (itemToRemove) {
+      toast.success(`${itemToRemove.name} removed from cart`);
+    }
   };
   
   const clearCart = () => {
     setCartItems([]);
+    localStorage.removeItem('cartItems');
+    toast.success('Cart cleared successfully');
   };
   
   const applyCoupon = () => {
     if (couponCode.toLowerCase() === 'welcome10') {
-      // Apply 10% discount
       setCouponApplied(true);
       setDiscount(0.1); // 10% discount
+      toast.success('Coupon applied successfully!', {
+        description: '10% discount has been applied to your order'
+      });
     } else {
-      // Invalid coupon code
       setCouponApplied(false);
       setDiscount(0);
-      alert('Invalid coupon code. Please try again.');
+      toast.error('Invalid coupon code', {
+        description: 'Please check the code and try again'
+      });
     }
   };
   
-  // Calculate subtotal
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   
-  // Calculate discount amount
   const discountAmount = couponApplied ? subtotal * discount : 0;
   
-  // Calculate shipping
   const shipping = subtotal >= 499 ? 0 : 50;
   
-  // Calculate total
   const total = subtotal - discountAmount + shipping;
   
-  // Format numbers as Indian Rupees
   const formatPrice = (price: number) => {
     return `₹${price.toLocaleString('en-IN')}`;
   };
@@ -104,7 +98,6 @@ const Cart = () => {
       <Navbar />
       
       <div className="pt-20 animate-fade-in">
-        {/* Page Header */}
         <div className="bg-earth-light py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-display font-bold text-center">
@@ -116,7 +109,6 @@ const Cart = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {cartItems.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Cart Items */}
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                   <div className="p-6 border-b border-border">
@@ -134,7 +126,6 @@ const Cart = () => {
                     </div>
                   </div>
                   
-                  {/* Cart Items List */}
                   <div className="divide-y divide-border">
                     {cartItems.map((item) => (
                       <div key={item.id} className="p-6 flex flex-col sm:flex-row items-start sm:items-center animate-fade-in">
@@ -186,7 +177,6 @@ const Cart = () => {
                     ))}
                   </div>
                   
-                  {/* Continue Shopping */}
                   <div className="p-6 border-t border-border">
                     <Link 
                       to="/products"
@@ -198,7 +188,6 @@ const Cart = () => {
                   </div>
                 </div>
                 
-                {/* Delivery & Returns Info */}
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white rounded-xl p-4 shadow-sm flex items-start">
                     <div className="bg-primary/10 rounded-full p-2 mr-3">
@@ -238,7 +227,6 @@ const Cart = () => {
                 </div>
               </div>
               
-              {/* Order Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-xl shadow-sm overflow-hidden sticky top-24">
                   <div className="p-6 border-b border-border">
@@ -272,7 +260,6 @@ const Cart = () => {
                       <span>{formatPrice(total)}</span>
                     </div>
                     
-                    {/* Coupon Code */}
                     <div className="pt-4">
                       <label htmlFor="coupon" className="block text-sm font-medium mb-2">
                         Apply Coupon Code
@@ -298,13 +285,11 @@ const Cart = () => {
                       </p>
                     </div>
                     
-                    {/* Checkout Button */}
                     <button className="w-full btn-primary mt-6 flex items-center justify-center">
                       <Lock className="h-4 w-4 mr-2" />
                       Proceed to Checkout
                     </button>
                     
-                    {/* Payment Methods */}
                     <div className="mt-4 text-center">
                       <p className="text-xs text-muted-foreground mb-2">
                         Secure Payment Options
@@ -339,7 +324,6 @@ const Cart = () => {
             </div>
           )}
           
-          {/* Product Recommendations */}
           {cartItems.length > 0 && (
             <div className="mt-16">
               <h2 className="text-2xl font-display font-bold mb-8">

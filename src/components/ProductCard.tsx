@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Heart } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   id: number;
@@ -26,6 +27,39 @@ const ProductCard: React.FC<ProductCardProps> = ({
   isBestSeller = false,
   isFeatured = false,
 }) => {
+  const handleAddToCart = () => {
+    // Get existing cart items from localStorage or initialize empty array
+    const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    
+    // Check if product is already in cart
+    const existingItemIndex = existingCartItems.findIndex((item: any) => item.id === id);
+    
+    if (existingItemIndex !== -1) {
+      // If product exists, increment quantity
+      existingCartItems[existingItemIndex].quantity += 1;
+      toast.success(`Increased ${name} quantity in cart`);
+    } else {
+      // Add new product to cart
+      existingCartItems.push({
+        id,
+        name,
+        price,
+        quantity: 1,
+        imageSrc,
+      });
+      toast.success(`${name} added to cart successfully!`, {
+        description: `₹${price.toLocaleString()} - Click to view cart`,
+        action: {
+          label: "View Cart",
+          onClick: () => window.location.href = '/cart'
+        },
+      });
+    }
+    
+    // Save updated cart to localStorage
+    localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+  };
+
   return (
     <div className="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md animate-fade-in">
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl bg-muted">
@@ -77,7 +111,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <span className="text-lg font-semibold">
             ₹{price.toLocaleString()}
           </span>
-          <button className="btn-primary py-1 px-3 h-auto flex items-center gap-1 text-sm transition-transform hover:scale-105">
+          <button 
+            className="btn-primary py-1 px-3 h-auto flex items-center gap-1 text-sm transition-transform hover:scale-105"
+            onClick={handleAddToCart}
+          >
             <ShoppingCart className="h-4 w-4" />
             <span>Add</span>
           </button>
