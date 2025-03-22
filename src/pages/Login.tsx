@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +50,31 @@ const Login = () => {
     setTimeout(() => {
       console.log('Form submitted:', { email, password, rememberMe });
       setIsSubmitting(false);
-      // Here you would normally handle the response from your auth API
+      
+      // Show success message and redirect
+      if (isLogin) {
+        toast.success('Signed in successfully!', {
+          description: 'Welcome back to OrganicTrove',
+          action: {
+            label: 'Go to Products',
+            onClick: () => navigate('/products')
+          },
+        });
+      } else {
+        toast.success('Account created successfully!', {
+          description: 'Welcome to OrganicTrove',
+          action: {
+            label: 'Go to Products',
+            onClick: () => navigate('/products')
+          },
+        });
+      }
+      
+      // Redirect after a short delay
+      setTimeout(() => {
+        navigate('/');
+      }, 1500);
+      
     }, 1500);
   };
   
