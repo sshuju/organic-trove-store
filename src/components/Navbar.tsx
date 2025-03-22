@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
+import { toast } from 'sonner';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +24,24 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  useEffect(() => {
+    // Update cart count when component mounts and whenever location changes
+    updateCartCount();
+    
+    // Add event listener for storage changes (when cart is updated from other components)
+    window.addEventListener('storage', updateCartCount);
+    
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+    };
+  }, [location]);
+  
+  const updateCartCount = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    const count = cartItems.reduce((total: number, item: any) => total + item.quantity, 0);
+    setCartItemCount(count);
+  };
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
   useEffect(() => {
@@ -28,6 +49,11 @@ const Navbar = () => {
   }, [location]);
   
   const isActive = (path: string) => location.pathname === path;
+  
+  // Function to check if user is signed in
+  const isUserSignedIn = () => {
+    return localStorage.getItem('isSignedIn') === 'true';
+  };
   
   return (
     <header 
@@ -94,16 +120,31 @@ const Navbar = () => {
             </button>
             <Link to="/cart" className="rounded-full p-2 text-foreground hover:bg-muted transition-colors relative">
               <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                0
-              </span>
+              {cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
-            <Link 
-              to="/login" 
-              className="hidden md:inline-flex btn-outline"
-            >
-              Sign In
-            </Link>
+            {isUserSignedIn() ? (
+              <button 
+                onClick={() => {
+                  localStorage.removeItem('isSignedIn');
+                  toast.success('Signed out successfully');
+                  navigate('/');
+                }}
+                className="hidden md:inline-flex btn-outline"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link 
+                to="/login" 
+                className="hidden md:inline-flex btn-outline"
+              >
+                Sign In
+              </Link>
+            )}
             <button 
               className="md:hidden rounded-full p-2 text-foreground hover:bg-muted transition-colors"
               onClick={toggleMenu}
@@ -150,12 +191,25 @@ const Navbar = () => {
             >
               Help
             </Link>
-            <Link 
-              to="/login" 
-              className="block py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
-            >
-              Sign In
-            </Link>
+            {isUserSignedIn() ? (
+              <button 
+                onClick={() => {
+                  localStorage.removeItem('isSignedIn');
+                  toast.success('Signed out successfully');
+                  navigate('/');
+                }}
+                className="block py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link 
+                to="/login" 
+                className="block py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
+              >
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       )}

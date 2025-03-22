@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -27,7 +27,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
   isBestSeller = false,
   isFeatured = false,
 }) => {
+  const navigate = useNavigate();
+
+  const isUserSignedIn = () => {
+    return localStorage.getItem('isSignedIn') === 'true';
+  };
+
   const handleAddToCart = () => {
+    // Check if user is signed in
+    if (!isUserSignedIn()) {
+      toast.error('Please sign in to add items to cart', {
+        description: 'You need to be signed in to make purchases',
+        action: {
+          label: "Sign In",
+          onClick: () => navigate('/login')
+        },
+      });
+      return;
+    }
+
     // Get existing cart items from localStorage or initialize empty array
     const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     
@@ -51,13 +69,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
         description: `₹${price.toLocaleString()} - Click to view cart`,
         action: {
           label: "View Cart",
-          onClick: () => window.location.href = '/cart'
+          onClick: () => navigate('/cart')
         },
       });
     }
     
     // Save updated cart to localStorage
     localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+    
+    // Dispatch a storage event to update cart count in navbar
+    window.dispatchEvent(new Event('storage'));
   };
 
   return (

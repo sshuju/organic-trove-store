@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
@@ -51,6 +50,9 @@ const Login = () => {
       console.log('Form submitted:', { email, password, rememberMe });
       setIsSubmitting(false);
       
+      // Set user as signed in
+      localStorage.setItem('isSignedIn', 'true');
+      
       // Show success message and redirect
       if (isLogin) {
         toast.success('Signed in successfully!', {
@@ -70,9 +72,12 @@ const Login = () => {
         });
       }
       
+      // Dispatch a storage event to update navbar
+      window.dispatchEvent(new Event('storage'));
+      
       // Redirect after a short delay
       setTimeout(() => {
-        navigate('/');
+        navigate('/products');
       }, 1500);
       
     }, 1500);

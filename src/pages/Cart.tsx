@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Trash2, 
   Plus, 
@@ -17,17 +17,26 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<any[]>([]);
   const [couponCode, setCouponCode] = useState('');
   const [couponApplied, setCouponApplied] = useState(false);
   const [discount, setDiscount] = useState(0);
   
   useEffect(() => {
+    if (localStorage.getItem('isSignedIn') !== 'true') {
+      toast.error('Please sign in to view your cart', {
+        description: 'You need to be signed in to make purchases'
+      });
+      navigate('/login');
+      return;
+    }
+    
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     setCartItems(storedCartItems);
     
     window.scrollTo(0, 0);
-  }, []);
+  }, [navigate]);
   
   const updateQuantity = (id: number, delta: number) => {
     const updatedItems = cartItems.map(item => 

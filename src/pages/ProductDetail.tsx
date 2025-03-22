@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   ShoppingCart, 
   Heart, 
@@ -83,6 +83,7 @@ What's in the box: 4 bamboo toothbrushes in different colors (natural, blue, gre
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<any>(null);
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
   const [quantity, setQuantity] = useState(1);
@@ -105,6 +106,10 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, [id]);
   
+  const isUserSignedIn = () => {
+    return localStorage.getItem('isSignedIn') === 'true';
+  };
+  
   const incrementQuantity = () => {
     setQuantity(prev => prev + 1);
   };
@@ -117,6 +122,17 @@ const ProductDetail = () => {
   
   const handleAddToCart = () => {
     if (!product) return;
+    
+    if (!isUserSignedIn()) {
+      toast.error('Please sign in to add items to cart', {
+        description: 'You need to be signed in to make purchases',
+        action: {
+          label: "Sign In",
+          onClick: () => navigate('/login')
+        },
+      });
+      return;
+    }
     
     const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     
@@ -139,12 +155,14 @@ const ProductDetail = () => {
         description: `${quantity} × ₹${product.price.toLocaleString()} added to your cart`,
         action: {
           label: "View Cart",
-          onClick: () => window.location.href = '/cart'
+          onClick: () => navigate('/cart')
         },
       });
     }
     
     localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+    
+    window.dispatchEvent(new Event('storage'));
   };
   
   if (!product) {
