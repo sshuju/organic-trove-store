@@ -1,7 +1,8 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Gift, Leaf, RefreshCw, Truck } from 'lucide-react';
+import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
@@ -70,9 +71,22 @@ const categories = [
 ];
 
 const Index = () => {
+  const [email, setEmail] = useState('');
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (email) {
+      toast.success('Successfully subscribed!', {
+        description: 'Thank you for joining our organic community.',
+      });
+      setEmail('');
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -318,16 +332,19 @@ const Index = () => {
                 <p className="text-muted-foreground max-w-xl mb-6">
                   Subscribe to our newsletter for exclusive offers, new product announcements, sustainable living tips, and more.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-72"
+                    required
                   />
-                  <button className="btn-primary">
+                  <button type="submit" className="btn-primary">
                     Subscribe
                   </button>
-                </div>
+                </form>
                 <p className="text-xs text-muted-foreground mt-3">
                   By subscribing, you agree to our Privacy Policy and consent to receive updates from us.
                 </p>

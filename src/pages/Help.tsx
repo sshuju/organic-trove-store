@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -12,6 +11,7 @@ import {
   ShieldCheck, 
   Search
 } from 'lucide-react';
+import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -155,11 +155,15 @@ const Help = () => {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
   const [filteredFaqs, setFilteredFaqs] = useState(faqs);
   
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   
-  // Handle search
   useEffect(() => {
     if (searchQuery.trim() === '') {
       setFilteredFaqs(faqs);
@@ -190,12 +194,24 @@ const Help = () => {
     setActiveQuestion(activeQuestion === questionId ? null : questionId);
   };
   
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    toast.success('Message sent successfully!', {
+      description: 'We\'ll get back to you as soon as possible.',
+    });
+    
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <div className="pt-20 animate-fade-in">
-        {/* Hero Section */}
         <section className="bg-earth-light py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-3xl md:text-4xl font-display font-bold mb-6">
@@ -205,7 +221,6 @@ const Help = () => {
               Find answers to frequently asked questions or get in touch with our support team.
             </p>
             
-            {/* Search Bar */}
             <div className="relative max-w-md mx-auto">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-muted-foreground" />
@@ -221,7 +236,6 @@ const Help = () => {
           </div>
         </section>
         
-        {/* Quick Links Section */}
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -304,7 +318,6 @@ const Help = () => {
           </div>
         </section>
         
-        {/* FAQs Section */}
         <section id="faqs-section" className="py-16 bg-organic-light">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-display font-bold mb-8 text-center">
@@ -375,7 +388,6 @@ const Help = () => {
           </div>
         </section>
         
-        {/* Contact Section */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-12">
@@ -430,7 +442,6 @@ const Help = () => {
           </div>
         </section>
         
-        {/* Contact Form Section */}
         <section className="py-16 bg-earth-light">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-xl shadow-sm p-6 md:p-8">
@@ -438,7 +449,7 @@ const Help = () => {
                 Send Us a Message
               </h2>
               
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -447,8 +458,11 @@ const Help = () => {
                     <input
                       id="name"
                       type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       placeholder="Enter your name"
+                      required
                     />
                   </div>
                   
@@ -459,8 +473,11 @@ const Help = () => {
                     <input
                       id="email"
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       placeholder="Enter your email"
+                      required
                     />
                   </div>
                 </div>
@@ -472,8 +489,11 @@ const Help = () => {
                   <input
                     id="subject"
                     type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                     className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     placeholder="What is your message about?"
+                    required
                   />
                 </div>
                 
@@ -484,8 +504,11 @@ const Help = () => {
                   <textarea
                     id="message"
                     rows={5}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     placeholder="Enter your message here..."
+                    required
                   ></textarea>
                 </div>
                 
