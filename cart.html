@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | OrganicTrove</title>
+  <meta name="description" content="View and manage your shopping cart at OrganicTrove." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        Organic<span>Trove</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+          <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html">All Products</a>
+            <a href="products.html?category=food">Food & Beverages</a>
+            <a href="products.html?category=beauty">Beauty & Personal Care</a>
+            <a href="products.html?category=home">Home & Living</a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="icon-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="cart.html" class="icon-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <button class="nav-mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html" id="mobileSignInButton">Sign In</a>
+    </div>
+  </header>
+
+  <main class="cart-section">
+    <div class="container">
+      <div class="cart-title">
+        <h1>Your Shopping Cart</h1>
+      </div>
+      
+      <div id="cartContent">
+        <!-- Cart content will be dynamically generated here -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="index.html" class="logo">
+            Organic<span>Trove</span>
+          </a>
+          <p style="margin: 1rem 0; font-size: 0.875rem; color: hsl(110, 5%, 45%);">
+            Committed to providing 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+            <li><a href="login.html">My Account</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="products.html?category=food">Food & Beverages</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=wellness">Health & Wellness</a></li>
+            <li><a href="products.html?category=gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                123 Organic Lane, Green City, Karnataka, India - 560001
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                +91 98765 43210
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">
+                hello@organictrove.in
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="currentYear"></span> OrganicTrove. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login notification -->
+  <div class="notification notification-error" id="loginNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Please sign in</div>
+      <div class="notification-message">You need to be signed in to view your cart</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('loginNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+
+    // Update sign in button
+    function updateSignInButton() {
+      const signInButton = document.getElementById('signInButton');
+      const mobileSignInButton = document.getElementById('mobileSignInButton');
+      
+      if (isUserSignedIn()) {
+        signInButton.textContent = 'Sign Out';
+        signInButton.href = '#';
+        signInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+        
+        mobileSignInButton.textContent = 'Sign Out';
+        mobileSignInButton.href = '#';
+        mobileSignInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+      }
+    }
+
+    // Call on page load
+    updateSignInButton();
+
+    // Render cart content
+    function renderCart() {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+          window.location.href = 'login.html';
+        }, 2000);
+        
+        // Show empty cart until redirect
+        const cartContent = document.getElementById('cartContent');
+        cartContent.innerHTML = `
+          <div class="empty-cart">
+            <h2>Please Sign In</h2>
+            <p>You need to be signed in to view your cart</p>
+            <a href="login.html" class="btn btn-primary">Sign In</a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Get cart items from localStorage
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const cartContent = document.getElementById('cartContent');
+      
+      if (cartItems.length === 0) {
+        // Show empty cart message
+        cartContent.innerHTML = `
+          <div class="empty-cart">
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any products to your cart yet.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Calculate cart totals
+      const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal >= 499 ? 0 : 50;
+      const total = subtotal + shipping;
+      
+      // Render cart with items
+      cartContent.innerHTML = `
+        <div class="cart-grid">
+          <div class="cart-items">
+            ${cartItems.map(item => `
+              <div class="cart-item">
+                <div class="cart-item-image">
+                  <img src="${item.imageSrc}" alt="${item.name}">
+                </div>
+                <div class="cart-item-details">
+                  <h3 class="cart-item-title">${item.name}</h3>
+                  <div class="cart-item-price">₹${item.price} per item</div>
+                  <div class="cart-item-actions">
+                    <div class="quantity-input">
+                      <button type="button" class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                      <input type="text" class="quantity-value" value="${item.quantity}" readonly>
+                      <button type="button" class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                    </div>
+                    <button type="button" class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                  </div>
+                </div>
+                <div style="font-weight: 600;">
+                  ₹${(item.price * item.quantity).toLocaleString()}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="cart-summary">
+            <h2>Order Summary</h2>
+            <div class="summary-item">
+              <span>Subtotal</span>
+              <span>₹${subtotal.toLocaleString()}</span>
+            </div>
+            <div class="summary-item">
+              <span>Shipping</span>
+              <span>${shipping === 0 ? 'Free' : `₹${shipping}`}</span>
+            </div>
+            ${shipping > 0 ? `
+              <div style="font-size: 0.875rem; color: hsl(110, 5%, 45%); margin-bottom: 0.75rem;">
+                Add ₹${(499 - subtotal).toLocaleString()} more to get free shipping
+              </div>
+            ` : ''}
+            <div class="summary-item total">
+              <span>Total</span>
+              <span>₹${total.toLocaleString()}</span>
+            </div>
+            <button type="button" class="btn btn-primary checkout-btn" onclick="checkout()">
+              Proceed to Checkout
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // Update item quantity
+    function updateQuantity(productId, newQuantity) {
+      if (newQuantity < 1) return;
+      
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const itemIndex = cartItems.findIndex(item => item.id === productId);
+      
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].quantity = newQuantity;
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+        // Re-render cart
+        renderCart();
+        
+        // Update cart count
+        updateCartCount();
+      }
+    }
+
+    // Remove item from cart
+    function removeFromCart(productId) {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const updatedCart = cartItems.filter(item => item.id !== productId);
+      
+      localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+      
+      // Re-render cart
+      renderCart();
+      
+      // Update cart count
+      updateCartCount();
+    }
+
+    // Proceed to checkout
+    function checkout() {
+      window.location.href = 'shipping.html';
+    }
+
+    function hideNotification(id) {
+      const notification = document.getElementById(id);
+      notification.classList.remove('show');
+    }
+
+    // Update the cart count based on local storage
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
+      const cartCountElements = document.querySelectorAll('.cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+    }
+
+    // Call on page load
+    updateCartCount();
+    renderCart();
+  </script>
+</body>
+</html>

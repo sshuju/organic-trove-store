@@ -1,26 +1,405 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>organic-trove-store</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OrganicTrove - Organic Products Store</title>
+  <meta name="description" content="OrganicTrove offers 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        Organic<span>Trove</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html" class="active">Home</a>
+        <div class="dropdown">
+          <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html">All Products</a>
+            <a href="products.html?category=food">Food & Beverages</a>
+            <a href="products.html?category=beauty">Beauty & Personal Care</a>
+            <a href="products.html?category=home">Home & Living</a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="icon-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="cart.html" class="icon-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-desktop">Sign In</a>
+        <button class="nav-mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html">Sign In</a>
+    </div>
+  </header>
 
-    <meta property="og:title" content="Lovable Generated Project" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Organic Products for a Sustainable Lifestyle</h1>
+        <p>Shop our curated collection of 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.</p>
+        <div class="hero-buttons">
+          <a href="products.html" class="btn btn-primary">Shop Now</a>
+          <a href="about.html" class="btn btn-outline">Learn More</a>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="Organic products arrangement">
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-container">
+      <div class="section-title">
+        <h2>Featured Products</h2>
+        <p>Our hand-picked selection of premium organic products</p>
+      </div>
+      
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="product-image">
+            <a href="product.html?id=1">
+              <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Honey">
+            </a>
+            <div class="product-badges">
+              <span class="badge badge-new">New</span>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-category">Food & Beverages</div>
+            <h3 class="product-title">
+              <a href="product.html?id=1">Wild Forest Honey</a>
+            </h3>
+            <p class="product-description">100% pure, ethically sourced wild forest honey packed with natural goodness.</p>
+            <div class="product-footer">
+              <div class="product-price">₹450</div>
+              <button class="btn-add" onclick="showLoginNotification()">
+                <i class="fas fa-shopping-cart"></i>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="product-image">
+            <a href="product.html?id=2">
+              <img src="https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Soap">
+            </a>
+            <div class="product-badges">
+              <span class="badge badge-bestseller">Best Seller</span>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-category">Beauty & Personal Care</div>
+            <h3 class="product-title">
+              <a href="product.html?id=2">Lavender Handmade Soap</a>
+            </h3>
+            <p class="product-description">Handcrafted soap made with organic oils and pure lavender essential oil.</p>
+            <div class="product-footer">
+              <div class="product-price">₹250</div>
+              <button class="btn-add" onclick="showLoginNotification()">
+                <i class="fas fa-shopping-cart"></i>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-image">
+            <a href="product.html?id=3">
+              <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="Bamboo Toothbrush">
+            </a>
+          </div>
+          <div class="product-details">
+            <div class="product-category">Home & Living</div>
+            <h3 class="product-title">
+              <a href="product.html?id=3">Bamboo Toothbrush Set</a>
+            </h3>
+            <p class="product-description">Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4.</p>
+            <div class="product-footer">
+              <div class="product-price">₹350</div>
+              <button class="btn-add" onclick="showLoginNotification()">
+                <i class="fas fa-shopping-cart"></i>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product 4 -->
+        <div class="product-card">
+          <div class="product-image">
+            <a href="product.html?id=4">
+              <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea">
+            </a>
+          </div>
+          <div class="product-details">
+            <div class="product-category">Food & Beverages</div>
+            <h3 class="product-title">
+              <a href="product.html?id=4">Herbal Tea Collection</a>
+            </h3>
+            <p class="product-description">Premium collection of organic herbal teas from the Himalayan region.</p>
+            <div class="product-footer">
+              <div class="product-price">₹550</div>
+              <button class="btn-add" onclick="showLoginNotification()">
+                <i class="fas fa-shopping-cart"></i>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <a href="products.html" class="btn btn-outline">View All Products</a>
+      </div>
+    </section>
+    
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Choose OrganicTrove?</h2>
+          <p>Our commitment to quality, sustainability, and your well-being</p>
+        </div>
+        
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3 class="feature-title">100% Organic</h3>
+            <p class="feature-description">All our products are certified organic, free from harmful chemicals and pesticides.</p>
+          </div>
+          
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-recycle"></i>
+            </div>
+            <h3 class="feature-title">Eco-Friendly Packaging</h3>
+            <p class="feature-description">We use biodegradable, recyclable, and plastic-free packaging for all products.</p>
+          </div>
+          
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <h3 class="feature-title">Free Shipping</h3>
+            <p class="feature-description">Free shipping on all orders above ₹499. Fast and reliable delivery service.</p>
+          </div>
+          
+          <!-- Feature 4 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h3 class="feature-title">Ethical Sourcing</h3>
+            <p class="feature-description">We ensure fair trade practices and support local farmers and artisans.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="page-container">
+      <div class="section-title">
+        <h2>Subscribe to Our Newsletter</h2>
+        <p>Stay updated with our latest products, offers, and sustainable living tips</p>
+      </div>
+      
+      <div class="form-group" style="max-width: 500px; margin: 0 auto;">
+        <div style="display: flex;">
+          <input type="email" placeholder="Enter your email address" style="flex: 1; margin-right: 1rem;">
+          <button class="btn btn-primary" onclick="showSubscribeNotification()">Subscribe</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="index.html" class="logo">
+            Organic<span>Trove</span>
+          </a>
+          <p style="margin: 1rem 0; font-size: 0.875rem; color: hsl(110, 5%, 45%);">
+            Committed to providing 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+            <li><a href="login.html">My Account</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="products.html?category=food">Food & Beverages</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=wellness">Health & Wellness</a></li>
+            <li><a href="products.html?category=gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                123 Organic Lane, Green City, Karnataka, India - 560001
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                +91 98765 43210
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">
+                hello@organictrove.in
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="currentYear"></span> OrganicTrove. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <!-- Login notification -->
+  <div class="notification notification-error" id="loginNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Please sign in</div>
+      <div class="notification-message">You need to be signed in to add items to cart</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('loginNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Subscribe notification -->
+  <div class="notification notification-success" id="subscribeNotification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Successfully subscribed!</div>
+      <div class="notification-message">You'll now receive our newsletter</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('subscribeNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Notification functions
+    function showLoginNotification() {
+      const notification = document.getElementById('loginNotification');
+      notification.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        hideNotification('loginNotification');
+      }, 3000);
+    }
+
+    function showSubscribeNotification() {
+      const notification = document.getElementById('subscribeNotification');
+      notification.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        hideNotification('subscribeNotification');
+      }, 3000);
+    }
+
+    function hideNotification(id) {
+      const notification = document.getElementById(id);
+      notification.classList.remove('show');
+    }
+  </script>
+</body>
 </html>

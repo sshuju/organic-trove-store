@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | OrganicTrove</title>
+  <meta name="description" content="Complete your purchase of organic products at OrganicTrove." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        Organic<span>Trove</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+          <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html">All Products</a>
+            <a href="products.html?category=food">Food & Beverages</a>
+            <a href="products.html?category=beauty">Beauty & Personal Care</a>
+            <a href="products.html?category=home">Home & Living</a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="icon-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="cart.html" class="icon-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <button class="nav-mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html" id="mobileSignInButton">Sign In</a>
+    </div>
+  </header>
+
+  <main class="shipping-section">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; margin-bottom: 1rem;">Shipping Information</h1>
+      </div>
+      
+      <div id="shippingContent">
+        <!-- Shipping content will be dynamically generated here -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="index.html" class="logo">
+            Organic<span>Trove</span>
+          </a>
+          <p style="margin: 1rem 0; font-size: 0.875rem; color: hsl(110, 5%, 45%);">
+            Committed to providing 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+            <li><a href="login.html">My Account</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="products.html?category=food">Food & Beverages</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=wellness">Health & Wellness</a></li>
+            <li><a href="products.html?category=gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                123 Organic Lane, Green City, Karnataka, India - 560001
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                +91 98765 43210
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">
+                hello@organictrove.in
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="currentYear"></span> OrganicTrove. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login notification -->
+  <div class="notification notification-error" id="loginNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Please sign in</div>
+      <div class="notification-message">You need to be signed in to proceed with checkout</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('loginNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Empty cart notification -->
+  <div class="notification notification-error" id="emptyCartNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Empty cart</div>
+      <div class="notification-message">Your cart is empty. Add some products before checkout.</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('emptyCartNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Order placed notification -->
+  <div class="notification notification-success" id="orderPlacedNotification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Order placed successfully!</div>
+      <div class="notification-message">Thank you for shopping with OrganicTrove</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('orderPlacedNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+
+    // Update sign in button
+    function updateSignInButton() {
+      const signInButton = document.getElementById('signInButton');
+      const mobileSignInButton = document.getElementById('mobileSignInButton');
+      
+      if (isUserSignedIn()) {
+        signInButton.textContent = 'Sign Out';
+        signInButton.href = '#';
+        signInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+        
+        mobileSignInButton.textContent = 'Sign Out';
+        mobileSignInButton.href = '#';
+        mobileSignInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+      }
+    }
+
+    // Call on page load
+    updateSignInButton();
+
+    // Render shipping form
+    function renderShippingForm() {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+          window.location.href = 'login.html';
+        }, 2000);
+        
+        // Show message until redirect
+        const shippingContent = document.getElementById('shippingContent');
+        shippingContent.innerHTML = `
+          <div class="empty-cart">
+            <h2>Please Sign In</h2>
+            <p>You need to be signed in to proceed with checkout</p>
+            <a href="login.html" class="btn btn-primary">Sign In</a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Check if cart has items
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      if (cartItems.length === 0) {
+        // Show empty cart notification
+        const notification = document.getElementById('emptyCartNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('emptyCartNotification');
+          window.location.href = 'products.html';
+        }, 2000);
+        
+        // Show message until redirect
+        const shippingContent = document.getElementById('shippingContent');
+        shippingContent.innerHTML = `
+          <div class="empty-cart">
+            <h2>Your cart is empty</h2>
+            <p>Add some products to your cart before checkout</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        `;
+        return;
+      }
+      
+      // Calculate cart totals
+      const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal >= 499 ? 0 : 50;
+      const total = subtotal + shipping;
+      
+      // Render shipping form
+      const shippingContent = document.getElementById('shippingContent');
+      shippingContent.innerHTML = `
+        <div class="shipping-grid">
+          <div class="shipping-form">
+            <form id="shippingForm">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="fullName" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="addressLine1">Address Line 1 *</label>
+                <input type="text" id="addressLine1" name="addressLine1" placeholder="Street address, P.O. box, etc." required>
+              </div>
+              
+              <div class="form-group">
+                <label for="addressLine2">Address Line 2 (Optional)</label>
+                <input type="text" id="addressLine2" name="addressLine2" placeholder="Apartment, suite, unit, building, floor, etc.">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City *</label>
+                  <input type="text" id="city" name="city" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="state">State/Province *</label>
+                  <input type="text" id="state" name="state" required>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="postalCode">Postal Code *</label>
+                  <input type="text" id="postalCode" name="postalCode" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="country">Country *</label>
+                  <select id="country" name="country" required>
+                    <option value="India">India</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="phoneNumber">Phone Number *</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+              </div>
+              
+              <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                <a href="cart.html" style="display: flex; align-items: center; color: hsl(142, 64%, 41%);">
+                  <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
+                  Back to Cart
+                </a>
+                
+                <button type="submit" class="btn btn-primary">Place Order</button>
+              </div>
+            </form>
+          </div>
+          
+          <div class="order-summary">
+            <h2>Order Summary</h2>
+            
+            <div style="margin-bottom: 1.5rem;">
+              <div class="summary-item">
+                <span>Total Items:</span>
+                <span>${cartItems.reduce((sum, item) => sum + item.quantity, 0)}</span>
+              </div>
+              
+              <div class="summary-item total">
+                <span>Total Amount:</span>
+                <span>₹${total.toLocaleString()}</span>
+              </div>
+            </div>
+            
+            <div class="delivery-info">
+              <div class="delivery-info-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="delivery-info-text">
+                <h4>Delivery Info</h4>
+                <p>Estimated delivery within 3-5 business days</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Add form submission handler
+      document.getElementById('shippingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show processing state on button
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.innerHTML = '<span style="display: inline-block; width: 1rem; height: 1rem; border: 2px solid white; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></span>';
+        submitButton.disabled = true;
+        
+        // Add keyframes for spinner animation to document
+        if (!document.getElementById('spinnerAnimation')) {
+          const style = document.createElement('style');
+          style.id = 'spinnerAnimation';
+          style.textContent = `
+            @keyframes spin {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(360deg); }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        // Simulate order processing
+        setTimeout(() => {
+          // Clear cart
+          localStorage.setItem('cartItems', '[]');
+          
+          // Update cart count
+          updateCartCount();
+          
+          // Show success notification
+          const notification = document.getElementById('orderPlacedNotification');
+          notification.classList.add('show');
+          
+          // Redirect to home after a delay
+          setTimeout(() => {
+            hideNotification('orderPlacedNotification');
+            window.location.href = 'index.html';
+          }, 3000);
+        }, 2000);
+      });
+    }
+
+    function hideNotification(id) {
+      const notification = document.getElementById(id);
+      notification.classList.remove('show');
+    }
+
+    // Update the cart count based on local storage
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
+      const cartCountElements = document.querySelectorAll('.cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+    }
+
+    // Call on page load
+    updateCartCount();
+    renderShippingForm();
+  </script>
+</body>
+</html>

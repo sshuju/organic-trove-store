@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail | OrganicTrove</title>
+  <meta name="description" content="View detailed information about our organic products." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        Organic<span>Trove</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+          <a href="products.html" class="active">Products <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html">All Products</a>
+            <a href="products.html?category=food">Food & Beverages</a>
+            <a href="products.html?category=beauty">Beauty & Personal Care</a>
+            <a href="products.html?category=home">Home & Living</a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="icon-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="cart.html" class="icon-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <button class="nav-mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html" id="mobileSignInButton">Sign In</a>
+    </div>
+  </header>
+
+  <main class="product-detail-section">
+    <div class="container">
+      <div class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="products.html">Products</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="products.html?category=food" id="productCategory">Food & Beverages</a>
+        <span class="breadcrumb-separator">›</span>
+        <span id="productNameBreadcrumb">Wild Forest Honey</span>
+      </div>
+      
+      <div class="product-detail-grid">
+        <div class="product-gallery">
+          <div class="product-main-image">
+            <img id="productMainImage" src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Product">
+          </div>
+          <div class="product-thumbnails">
+            <div class="product-thumbnail active" onclick="changeMainImage(this.querySelector('img').src)">
+              <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Product thumbnail 1">
+            </div>
+            <div class="product-thumbnail" onclick="changeMainImage(this.querySelector('img').src)">
+              <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" alt="Product thumbnail 2">
+            </div>
+            <div class="product-thumbnail" onclick="changeMainImage(this.querySelector('img').src)">
+              <img src="https://images.unsplash.com/photo-1582878783681-bbbd06984acc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Product thumbnail 3">
+            </div>
+            <div class="product-thumbnail" onclick="changeMainImage(this.querySelector('img').src)">
+              <img src="https://images.unsplash.com/photo-1471943038886-87c772c31367?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=767&q=80" alt="Product thumbnail 4">
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-info">
+          <div class="product-info-header">
+            <div class="product-badges">
+              <span class="badge badge-new">New</span>
+            </div>
+            <h1 class="product-info-title" id="productName">Wild Forest Honey</h1>
+            <div class="product-info-price" id="productPrice">₹450</div>
+            <div class="product-info-description" id="productDescription">
+              <p>100% pure, ethically sourced wild forest honey packed with natural goodness. This honey is harvested from the deep forests of Western Ghats, where bees collect nectar from a variety of wild flowers.</p>
+              <p>Our honey is minimally processed to retain all its natural enzymes, vitamins, and minerals. It's not just a sweetener, but a nutritional powerhouse that supports immunity and overall wellbeing.</p>
+              <p>Each jar contains 250g of pure, unadulterated wild honey. No additives, no preservatives, just pure honey as nature intended.</p>
+            </div>
+          </div>
+          
+          <div class="product-form">
+            <div class="product-actions">
+              <div class="quantity-input product-quantity">
+                <button type="button" class="quantity-btn" onclick="decrementQuantity()">-</button>
+                <input type="number" id="quantity" class="quantity-value" value="1" min="1" max="10">
+                <button type="button" class="quantity-btn" onclick="incrementQuantity()">+</button>
+              </div>
+              <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+          
+          <div class="product-meta">
+            <p><span>SKU:</span> HON-001</p>
+            <p><span>Category:</span> <a href="products.html?category=food" id="productCategoryMeta">Food & Beverages</a></p>
+            <p><span>Tags:</span> <a href="#">Honey</a>, <a href="#">Organic</a>, <a href="#">Natural</a></p>
+            <p><span>Origin:</span> Western Ghats, India</p>
+            <p><span>Certification:</span> USDA Organic, India Organic</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="product-tabs">
+        <div class="tabs-header">
+          <button class="tab-button active" onclick="changeTab('details')">Product Details</button>
+          <button class="tab-button" onclick="changeTab('nutrition')">Nutritional Info</button>
+          <button class="tab-button" onclick="changeTab('shipping')">Shipping & Returns</button>
+          <button class="tab-button" onclick="changeTab('reviews')">Reviews</button>
+        </div>
+        
+        <div class="tab-content" id="tabContent">
+          <div id="details" class="tab-pane active">
+            <h3>Product Details</h3>
+            <p>Our Wild Forest Honey is harvested using sustainable practices that respect both the bees and their natural habitat. The honey is collected from hives located deep within the Western Ghats, away from agricultural lands and pollution.</p>
+            
+            <h4>Features:</h4>
+            <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li>100% Pure and Natural</li>
+              <li>Ethically harvested</li>
+              <li>No artificial additives or preservatives</li>
+              <li>Minimally processed to retain nutrients</li>
+              <li>Rich in antioxidants and enzymes</li>
+              <li>Supports local forest-dependent communities</li>
+            </ul>
+            
+            <h4>Benefits:</h4>
+            <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem;">
+              <li>Supports immune system health</li>
+              <li>Natural source of energy</li>
+              <li>Soothes sore throats and coughs</li>
+              <li>Has antibacterial and anti-inflammatory properties</li>
+              <li>Contains beneficial antioxidants</li>
+            </ul>
+            
+            <h4>Packaging:</h4>
+            <p>250g glass jar with metal lid. Our packaging is plastic-free and fully recyclable.</p>
+          </div>
+        </div>
+      </div>
+      
+      <section style="margin-top: 4rem;">
+        <div class="section-title">
+          <h2>You Might Also Like</h2>
+        </div>
+        
+        <div class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+          <!-- Related Product 1 -->
+          <div class="product-card">
+            <div class="product-image">
+              <a href="product.html?id=4">
+                <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea">
+              </a>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Food & Beverages</div>
+              <h3 class="product-title">
+                <a href="product.html?id=4">Herbal Tea Collection</a>
+              </h3>
+              <div class="product-footer">
+                <div class="product-price">₹550</div>
+                <button class="btn-add" onclick="addToCartRelated(4)">
+                  <i class="fas fa-shopping-cart"></i>
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Related Product 2 -->
+          <div class="product-card">
+            <div class="product-image">
+              <a href="product.html?id=8">
+                <img src="https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Coffee">
+              </a>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Food & Beverages</div>
+              <h3 class="product-title">
+                <a href="product.html?id=8">Single Origin Coffee</a>
+              </h3>
+              <div class="product-footer">
+                <div class="product-price">₹500</div>
+                <button class="btn-add" onclick="addToCartRelated(8)">
+                  <i class="fas fa-shopping-cart"></i>
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Related Product 3 -->
+          <div class="product-card">
+            <div class="product-image">
+              <a href="product.html?id=5">
+                <img src="https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Coconut Oil">
+              </a>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Beauty & Personal Care</div>
+              <h3 class="product-title">
+                <a href="product.html?id=5">Virgin Coconut Oil</a>
+              </h3>
+              <div class="product-footer">
+                <div class="product-price">₹400</div>
+                <button class="btn-add" onclick="addToCartRelated(5)">
+                  <i class="fas fa-shopping-cart"></i>
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Related Product 4 -->
+          <div class="product-card">
+            <div class="product-image">
+              <a href="product.html?id=6">
+                <img src="https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Beeswax Wraps">
+              </a>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Home & Living</div>
+              <h3 class="product-title">
+                <a href="product.html?id=6">Beeswax Food Wraps</a>
+              </h3>
+              <div class="product-footer">
+                <div class="product-price">₹600</div>
+                <button class="btn-add" onclick="addToCartRelated(6)">
+                  <i class="fas fa-shopping-cart"></i>
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="index.html" class="logo">
+            Organic<span>Trove</span>
+          </a>
+          <p style="margin: 1rem 0; font-size: 0.875rem; color: hsl(110, 5%, 45%);">
+            Committed to providing 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+            <li><a href="login.html">My Account</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="products.html?category=food">Food & Beverages</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=wellness">Health & Wellness</a></li>
+            <li><a href="products.html?category=gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                123 Organic Lane, Green City, Karnataka, India - 560001
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                +91 98765 43210
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">
+                hello@organictrove.in
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="currentYear"></span> OrganicTrove. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login notification -->
+  <div class="notification notification-error" id="loginNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Please sign in</div>
+      <div class="notification-message">You need to be signed in to add items to cart</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('loginNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Added to cart notification -->
+  <div class="notification notification-success" id="addedToCartNotification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Added to cart!</div>
+      <div class="notification-message" id="cartNotificationMessage"></div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('addedToCartNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script>
+    // Sample product data
+    const products = [
+      { id: 1, name: "Wild Forest Honey", price: 450, imageSrc: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", description: "100% pure, ethically sourced wild forest honey packed with natural goodness. This honey is harvested from the deep forests of Western Ghats, where bees collect nectar from a variety of wild flowers." },
+      { id: 2, name: "Lavender Handmade Soap", price: 250, imageSrc: "https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", description: "Handcrafted soap made with organic oils and pure lavender essential oil. Gentle on skin and environmentally friendly." },
+      { id: 3, name: "Bamboo Toothbrush Set", price: 350, imageSrc: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80", category: "Home & Living", description: "Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4." },
+      { id: 4, name: "Herbal Tea Collection", price: 550, imageSrc: "https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", category: "Food & Beverages", description: "Premium collection of organic herbal teas from the Himalayan region." },
+      { id: 5, name: "Virgin Coconut Oil", price: 400, imageSrc: "https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", description: "Cold-pressed virgin coconut oil for cooking and skincare. 500ml glass jar." },
+      { id: 6, name: "Beeswax Food Wraps", price: 600, imageSrc: "https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Home & Living", description: "Reusable food wraps made with organic cotton, beeswax, and jojoba oil. Set of 3." },
+      { id: 7, name: "Aloe Vera Face Cream", price: 750, imageSrc: "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", description: "Hydrating face cream with organic aloe vera, shea butter, and essential oils." },
+      { id: 8, name: "Single Origin Coffee", price: 500, imageSrc: "https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", description: "Shade-grown, organic coffee beans from the hills of Coorg. Medium roast, 250g." },
+    ];
+
+    // Get product ID from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id') || '1');
+    
+    // Find the product
+    const product = products.find(p => p.id === productId) || products[0];
+    
+    // Update product details on page
+    document.getElementById('productName').textContent = product.name;
+    document.getElementById('productNameBreadcrumb').textContent = product.name;
+    document.getElementById('productPrice').textContent = `₹${product.price}`;
+    document.getElementById('productDescription').querySelector('p:first-child').textContent = product.description;
+    document.getElementById('productCategory').textContent = product.category;
+    document.getElementById('productCategory').href = `products.html?category=${product.category.toLowerCase().replace(/\s+&\s+/g, '-')}`;
+    document.getElementById('productCategoryMeta').textContent = product.category;
+    document.getElementById('productCategoryMeta').href = `products.html?category=${product.category.toLowerCase().replace(/\s+&\s+/g, '-')}`;
+    document.getElementById('productMainImage').src = product.imageSrc;
+    document.getElementById('productMainImage').alt = product.name;
+    
+    // Set the first thumbnail to current product image
+    document.querySelector('.product-thumbnail img').src = product.imageSrc;
+
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Change main product image
+    function changeMainImage(src) {
+      document.getElementById('productMainImage').src = src;
+      
+      // Update active thumbnail
+      document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+        if (thumb.querySelector('img').src === src) {
+          thumb.classList.add('active');
+        } else {
+          thumb.classList.remove('active');
+        }
+      });
+    }
+
+    // Quantity controls
+    function incrementQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      let value = parseInt(quantityInput.value);
+      quantityInput.value = Math.min(value + 1, 10);
+    }
+
+    function decrementQuantity() {
+      const quantityInput = document.getElementById('quantity');
+      let value = parseInt(quantityInput.value);
+      quantityInput.value = Math.max(value - 1, 1);
+    }
+
+    // Tab switching
+    function changeTab(tabId) {
+      // Update active tab button
+      document.querySelectorAll('.tab-button').forEach(button => {
+        if (button.textContent.toLowerCase().includes(tabId)) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+      
+      // Only the product details tab is implemented in this static version
+    }
+
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+
+    // Update sign in button
+    function updateSignInButton() {
+      const signInButton = document.getElementById('signInButton');
+      const mobileSignInButton = document.getElementById('mobileSignInButton');
+      
+      if (isUserSignedIn()) {
+        signInButton.textContent = 'Sign Out';
+        signInButton.href = '#';
+        signInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+        
+        mobileSignInButton.textContent = 'Sign Out';
+        mobileSignInButton.href = '#';
+        mobileSignInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+      }
+    }
+
+    // Call on page load
+    updateSignInButton();
+    
+    // Add to cart function for current product
+    function addToCart() {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+        }, 3000);
+        return;
+      }
+      
+      // Get quantity
+      const quantity = parseInt(document.getElementById('quantity').value);
+      
+      // Get existing cart items from localStorage or initialize empty array
+      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      
+      // Check if product is already in cart
+      const existingItemIndex = existingCartItems.findIndex(item => item.id === product.id);
+      
+      if (existingItemIndex !== -1) {
+        // If product exists, add the quantity
+        existingCartItems[existingItemIndex].quantity += quantity;
+        showAddedToCartNotification(`Updated ${product.name} quantity in cart`);
+      } else {
+        // Add new product to cart
+        existingCartItems.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: quantity,
+          imageSrc: product.imageSrc,
+        });
+        showAddedToCartNotification(`${product.name} added to cart successfully!`);
+      }
+      
+      // Save updated cart to localStorage
+      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      
+      // Update cart count
+      updateCartCount();
+    }
+
+    // Add to cart function for related products
+    function addToCartRelated(productId) {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+        }, 3000);
+        return;
+      }
+      
+      // Get product details
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      // Get existing cart items from localStorage or initialize empty array
+      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      
+      // Check if product is already in cart
+      const existingItemIndex = existingCartItems.findIndex(item => item.id === productId);
+      
+      if (existingItemIndex !== -1) {
+        // If product exists, increment quantity
+        existingCartItems[existingItemIndex].quantity += 1;
+        showAddedToCartNotification(`Increased ${product.name} quantity in cart`);
+      } else {
+        // Add new product to cart
+        existingCartItems.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          imageSrc: product.imageSrc,
+        });
+        showAddedToCartNotification(`${product.name} added to cart successfully!`);
+      }
+      
+      // Save updated cart to localStorage
+      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      
+      // Update cart count
+      updateCartCount();
+    }
+
+    function showAddedToCartNotification(message) {
+      document.getElementById('cartNotificationMessage').textContent = message;
+      const notification = document.getElementById('addedToCartNotification');
+      notification.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        hideNotification('addedToCartNotification');
+      }, 3000);
+    }
+
+    function hideNotification(id) {
+      const notification = document.getElementById(id);
+      notification.classList.remove('show');
+    }
+
+    // Update the cart count based on local storage
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
+      const cartCountElements = document.querySelectorAll('.cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+    }
+
+    // Call on page load
+    updateCartCount();
+  </script>
+</body>
+</html>

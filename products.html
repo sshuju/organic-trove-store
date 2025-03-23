@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | OrganicTrove</title>
+  <meta name="description" content="Shop our wide range of organic and sustainable products. From food to beauty products, find everything you need for a healthy lifestyle." />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo">
+        Organic<span>Trove</span>
+      </a>
+      
+      <nav class="nav-desktop">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+          <a href="products.html" class="active">Products <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="products.html">All Products</a>
+            <a href="products.html?category=food">Food & Beverages</a>
+            <a href="products.html?category=beauty">Beauty & Personal Care</a>
+            <a href="products.html?category=home">Home & Living</a>
+          </div>
+        </div>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      
+      <div class="nav-actions">
+        <button class="icon-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <a href="cart.html" class="icon-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <button class="nav-mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="nav-mobile" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="about.html">About</a>
+      <a href="help.html">Help</a>
+      <a href="login.html" id="mobileSignInButton">Sign In</a>
+    </div>
+  </header>
+
+  <main>
+    <section style="padding-top: 6rem; padding-bottom: 4rem; background-color: hsl(110, 33%, 96%);">
+      <div class="container">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Our Products</h1>
+        <p style="color: hsl(110, 5%, 45%); margin-bottom: 2rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">
+          Explore our curated collection of organic, sustainable, and eco-friendly products. Everything you need for a healthier lifestyle.
+        </p>
+      </div>
+    </section>
+    
+    <section class="page-container">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div>
+              <p id="productCount">Showing 8 products</p>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <label for="sort" style="font-size: 0.875rem;">Sort by:</label>
+              <select id="sort" style="padding: 0.5rem; border-radius: 0.375rem; border: 1px solid hsl(110, 10%, 85%);">
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="newest">Newest</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=1">
+                  <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Honey">
+                </a>
+                <div class="product-badges">
+                  <span class="badge badge-new">New</span>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Food & Beverages</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=1">Wild Forest Honey</a>
+                </h3>
+                <p class="product-description">100% pure, ethically sourced wild forest honey packed with natural goodness.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹450</div>
+                  <button class="btn-add" onclick="addToCart(1)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=2">
+                  <img src="https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Soap">
+                </a>
+                <div class="product-badges">
+                  <span class="badge badge-bestseller">Best Seller</span>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Beauty & Personal Care</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=2">Lavender Handmade Soap</a>
+                </h3>
+                <p class="product-description">Handcrafted soap made with organic oils and pure lavender essential oil.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹250</div>
+                  <button class="btn-add" onclick="addToCart(2)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=3">
+                  <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="Bamboo Toothbrush">
+                </a>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Home & Living</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=3">Bamboo Toothbrush Set</a>
+                </h3>
+                <p class="product-description">Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹350</div>
+                  <button class="btn-add" onclick="addToCart(3)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=4">
+                  <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea">
+                </a>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Food & Beverages</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=4">Herbal Tea Collection</a>
+                </h3>
+                <p class="product-description">Premium collection of organic herbal teas from the Himalayan region.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹550</div>
+                  <button class="btn-add" onclick="addToCart(4)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=5">
+                  <img src="https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Coconut Oil">
+                </a>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Beauty & Personal Care</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=5">Virgin Coconut Oil</a>
+                </h3>
+                <p class="product-description">Cold-pressed virgin coconut oil for cooking and skincare. 500ml glass jar.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹400</div>
+                  <button class="btn-add" onclick="addToCart(5)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=6">
+                  <img src="https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Beeswax Wraps">
+                </a>
+                <div class="product-badges">
+                  <span class="badge badge-bestseller">Best Seller</span>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Home & Living</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=6">Beeswax Food Wraps</a>
+                </h3>
+                <p class="product-description">Reusable food wraps made with organic cotton, beeswax, and jojoba oil. Set of 3.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹600</div>
+                  <button class="btn-add" onclick="addToCart(6)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=7">
+                  <img src="https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Face Cream">
+                </a>
+                <div class="product-badges">
+                  <span class="badge badge-new">New</span>
+                </div>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Beauty & Personal Care</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=7">Aloe Vera Face Cream</a>
+                </h3>
+                <p class="product-description">Hydrating face cream with organic aloe vera, shea butter, and essential oils.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹750</div>
+                  <button class="btn-add" onclick="addToCart(7)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card">
+              <div class="product-image">
+                <a href="product.html?id=8">
+                  <img src="https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Coffee">
+                </a>
+              </div>
+              <div class="product-details">
+                <div class="product-category">Food & Beverages</div>
+                <h3 class="product-title">
+                  <a href="product.html?id=8">Single Origin Coffee</a>
+                </h3>
+                <p class="product-description">Shade-grown, organic coffee beans from the hills of Coorg. Medium roast, 250g.</p>
+                <div class="product-footer">
+                  <div class="product-price">₹500</div>
+                  <button class="btn-add" onclick="addToCart(8)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div style="margin-top: 3rem; text-align: center;">
+            <button class="btn btn-outline">Load More Products</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <a href="index.html" class="logo">
+            Organic<span>Trove</span>
+          </a>
+          <p style="margin: 1rem 0; font-size: 0.875rem; color: hsl(110, 5%, 45%);">
+            Committed to providing 100% organic, sustainable, and zero-waste products for a healthier you and a healthier planet.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="help.html">Help & Support</a></li>
+            <li><a href="login.html">My Account</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="products.html?category=food">Food & Beverages</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=wellness">Health & Wellness</a></li>
+            <li><a href="products.html?category=gifts">Gift Sets</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-contact">
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                123 Organic Lane, Green City, Karnataka, India - 560001
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-phone-alt"></i>
+              </div>
+              <div class="footer-contact-text">
+                +91 98765 43210
+              </div>
+            </li>
+            <li>
+              <div class="footer-contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="footer-contact-text">
+                hello@organictrove.in
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <span id="currentYear"></span> OrganicTrove. All rights reserved.
+        </p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Shipping Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Login notification -->
+  <div class="notification notification-error" id="loginNotification">
+    <div class="notification-icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Please sign in</div>
+      <div class="notification-message">You need to be signed in to add items to cart</div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('loginNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- Added to cart notification -->
+  <div class="notification notification-success" id="addedToCartNotification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Added to cart!</div>
+      <div class="notification-message" id="cartNotificationMessage"></div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('addedToCartNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <script>
+    // Sample product data
+    const products = [
+      { id: 1, name: "Wild Forest Honey", price: 450, imageSrc: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages" },
+      { id: 2, name: "Lavender Handmade Soap", price: 250, imageSrc: "https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care" },
+      { id: 3, name: "Bamboo Toothbrush Set", price: 350, imageSrc: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80", category: "Home & Living" },
+      { id: 4, name: "Herbal Tea Collection", price: 550, imageSrc: "https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", category: "Food & Beverages" },
+      { id: 5, name: "Virgin Coconut Oil", price: 400, imageSrc: "https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care" },
+      { id: 6, name: "Beeswax Food Wraps", price: 600, imageSrc: "https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Home & Living" },
+      { id: 7, name: "Aloe Vera Face Cream", price: 750, imageSrc: "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care" },
+      { id: 8, name: "Single Origin Coffee", price: 500, imageSrc: "https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages" },
+    ];
+
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+
+    // Update sign in button
+    function updateSignInButton() {
+      const signInButton = document.getElementById('signInButton');
+      const mobileSignInButton = document.getElementById('mobileSignInButton');
+      
+      if (isUserSignedIn()) {
+        signInButton.textContent = 'Sign Out';
+        signInButton.href = '#';
+        signInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+        
+        mobileSignInButton.textContent = 'Sign Out';
+        mobileSignInButton.href = '#';
+        mobileSignInButton.onclick = function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isSignedIn');
+          location.reload();
+        };
+      }
+    }
+
+    // Call on page load
+    updateSignInButton();
+    
+    // Add to cart function
+    function addToCart(productId) {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+        }, 3000);
+        return;
+      }
+      
+      // Get product details
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      // Get existing cart items from localStorage or initialize empty array
+      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      
+      // Check if product is already in cart
+      const existingItemIndex = existingCartItems.findIndex(item => item.id === productId);
+      
+      if (existingItemIndex !== -1) {
+        // If product exists, increment quantity
+        existingCartItems[existingItemIndex].quantity += 1;
+        showAddedToCartNotification(`Increased ${product.name} quantity in cart`);
+      } else {
+        // Add new product to cart
+        existingCartItems.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          imageSrc: product.imageSrc,
+        });
+        showAddedToCartNotification(`${product.name} added to cart successfully!`);
+      }
+      
+      // Save updated cart to localStorage
+      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      
+      // Update cart count
+      updateCartCount();
+    }
+
+    function showAddedToCartNotification(message) {
+      document.getElementById('cartNotificationMessage').textContent = message;
+      const notification = document.getElementById('addedToCartNotification');
+      notification.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        hideNotification('addedToCartNotification');
+      }, 3000);
+    }
+
+    function hideNotification(id) {
+      const notification = document.getElementById(id);
+      notification.classList.remove('show');
+    }
+
+    // Update the cart count based on local storage
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
+      const cartCountElements = document.querySelectorAll('.cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+    }
+
+    // Call on page load
+    updateCartCount();
+  </script>
+</body>
+</html>
