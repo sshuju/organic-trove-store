@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,9 +81,10 @@
       <div class="product-grid">
         <!-- Product 1 -->
         <div class="product-card">
-          <a href="product.html?id=1" class="card-link" aria-label="View Wild Forest Honey details"></a>
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Honey" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
+            <a href="product.html?id=1">
+              <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Honey">
+            </a>
             <div class="product-badges">
               <span class="badge badge-new">New</span>
             </div>
@@ -105,9 +107,10 @@
         
         <!-- Product 2 -->
         <div class="product-card">
-          <a href="product.html?id=2" class="card-link" aria-label="View Lavender Handmade Soap details"></a>
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Soap" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
+            <a href="product.html?id=2">
+              <img src="https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Soap">
+            </a>
             <div class="product-badges">
               <span class="badge badge-bestseller">Best Seller</span>
             </div>
@@ -130,9 +133,10 @@
         
         <!-- Product 3 -->
         <div class="product-card">
-          <a href="product.html?id=3" class="card-link" aria-label="View Bamboo Toothbrush Set details"></a>
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="Bamboo Toothbrush" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
+            <a href="product.html?id=3">
+              <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="Bamboo Toothbrush">
+            </a>
           </div>
           <div class="product-details">
             <div class="product-category">Home & Living</div>
@@ -152,9 +156,10 @@
         
         <!-- Product 4 -->
         <div class="product-card">
-          <a href="product.html?id=4" class="card-link" aria-label="View Herbal Tea Collection details"></a>
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
+            <a href="product.html?id=4">
+              <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea">
+            </a>
           </div>
           <div class="product-details">
             <div class="product-category">Food & Beverages</div>
@@ -395,10 +400,6 @@
       const notification = document.getElementById(id);
       notification.classList.remove('show');
     }
-
-    // Preload fallback image
-    const fallbackImg = new Image();
-    fallbackImg.src = 'https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80';
   </script>
 </body>
 </html>

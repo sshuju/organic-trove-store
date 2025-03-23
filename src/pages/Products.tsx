@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { Filter, SlidersHorizontal, X, ChevronDown } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 
-// Mock product data with verified image URLs
+// Mock product data
 const allProducts = [
   {
     id: 1,
@@ -131,7 +131,6 @@ const priceRanges = [
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  const navigate = useNavigate();
   const [products, setProducts] = useState(allProducts);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedPriceRange, setSelectedPriceRange] = useState<number[]>([]);
@@ -230,11 +229,6 @@ const Products = () => {
     setSelectedCategory("All");
     setSelectedPriceRange([]);
     setSearchParams({});
-  };
-
-  // Go to product detail page
-  const goToProductDetail = (id: number) => {
-    navigate(`/product/${id}`);
   };
 
   return (
@@ -385,9 +379,7 @@ const Products = () => {
           {products.length > 0 ? (
             <div className="product-grid">
               {products.map((product) => (
-                <div key={product.id} onClick={() => goToProductDetail(product.id)} className="cursor-pointer">
-                  <ProductCard {...product} />
-                </div>
+                <ProductCard key={product.id} {...product} />
               ))}
             </div>
           ) : (
