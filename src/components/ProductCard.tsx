@@ -90,8 +90,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   const fallbackImageUrl = "https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80";
 
+  const handleProductClick = () => {
+    navigate(`/product/${id}`);
+  };
+
   return (
-    <div className="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md animate-fade-in">
+    <div className="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md animate-fade-in cursor-pointer" onClick={handleProductClick}>
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl bg-muted">
         <img
           src={imgError ? fallbackImageUrl : imageSrc}
