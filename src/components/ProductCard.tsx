@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { toast } from 'sonner';
@@ -28,12 +28,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
   isFeatured = false,
 }) => {
   const navigate = useNavigate();
+  const [imgError, setImgError] = useState(false);
 
   const isUserSignedIn = () => {
     return localStorage.getItem('isSignedIn') === 'true';
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent navigation to product detail
+    
     // Check if user is signed in
     if (!isUserSignedIn()) {
       toast.error('Please sign in to add items to cart', {
@@ -81,16 +84,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
     window.dispatchEvent(new Event('storage'));
   };
 
+  const handleImageError = () => {
+    setImgError(true);
+  };
+
+  const fallbackImageUrl = "https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80";
+
   return (
     <div className="group relative bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md animate-fade-in">
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-t-xl bg-muted">
-        <Link to={`/product/${id}`}>
-          <img
-            src={imageSrc}
-            alt={name}
-            className="h-full w-full object-cover object-center transition-all duration-500 group-hover:scale-105"
-          />
-        </Link>
+        <img
+          src={imgError ? fallbackImageUrl : imageSrc}
+          alt={name}
+          className="h-full w-full object-cover object-center transition-all duration-500 group-hover:scale-105"
+          onError={handleImageError}
+        />
         
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
@@ -120,11 +128,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
             {category}
           </span>
         </div>
-        <Link to={`/product/${id}`}>
-          <h3 className="text-base font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
-            {name}
-          </h3>
-        </Link>
+        <h3 className="text-base font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+          {name}
+        </h3>
         <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
           {description}
         </p>
