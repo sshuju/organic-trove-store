@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Products | OrganicTrove</title>
-  <meta name="description" content="Shop our wide range of organic and sustainable products. From food to beauty products, find everything you need for a healthy lifestyle." />
+  <meta name="description" content="Explore our range of organic, sustainable products at OrganicTrove." />
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
   <!-- Font Awesome for icons -->
@@ -40,7 +41,9 @@
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
         </a>
-        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </a>
         <button class="nav-mobile-toggle">
           <i class="fas fa-bars"></i>
         </button>
@@ -52,47 +55,51 @@
       <a href="products.html" class="active">Products</a>
       <a href="about.html">About</a>
       <a href="help.html">Help</a>
-      <a href="login.html" id="mobileSignInButton">Sign In</a>
+      <a href="login.html">Sign In</a>
     </div>
   </header>
 
   <main>
-    <section style="padding-top: 6rem; padding-bottom: 4rem; background-color: hsl(110, 33%, 96%);">
-      <div class="container">
-        <h1 style="font-size: 2.5rem; margin-bottom: 1rem; text-align: center;">Our Products</h1>
-        <p style="color: hsl(110, 5%, 45%); margin-bottom: 2rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto;">
-          Explore our curated collection of organic, sustainable, and eco-friendly products. Everything you need for a healthier lifestyle.
-        </p>
-      </div>
-    </section>
-    
     <section class="page-container">
-      <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
-        <div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-            <div>
-              <p id="productCount">Showing 8 products</p>
-            </div>
-            
-            <div style="display: flex; gap: 1rem; align-items: center;">
-              <label for="sort" style="font-size: 0.875rem;">Sort by:</label>
-              <select id="sort" style="padding: 0.5rem; border-radius: 0.375rem; border: 1px solid hsl(110, 10%, 85%);">
-                <option value="featured">Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="newest">Newest</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="product-grid" id="products-container">
-            <!-- Products will be added dynamically -->
-          </div>
-          
-          <div style="margin-top: 3rem; text-align: center;">
-            <button class="btn btn-outline">Load More Products</button>
-          </div>
+      <div class="section-title">
+        <h1>Our Products</h1>
+        <p>Discover our curated selection of organic, eco-friendly products</p>
+      </div>
+      
+      <div class="filters-bar">
+        <div class="category-filters">
+          <a href="products.html" class="filter-button active">All</a>
+          <a href="products.html?category=food" class="filter-button">Food & Beverages</a>
+          <a href="products.html?category=beauty" class="filter-button">Beauty & Personal Care</a>
+          <a href="products.html?category=home" class="filter-button">Home & Living</a>
+          <a href="products.html?category=wellness" class="filter-button">Health & Wellness</a>
         </div>
+        
+        <div class="sort-filter">
+          <select id="sortSelect">
+            <option value="featured">Featured</option>
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="product-grid" id="productGrid">
+        <!-- Products will be loaded here via JavaScript -->
+      </div>
+      
+      <!-- Pagination -->
+      <div class="pagination" id="pagination">
+        <button class="pagination-button" id="prevPage" disabled>
+          <i class="fas fa-arrow-left"></i> Previous
+        </button>
+        <div id="pageButtons">
+          <!-- Page buttons will be generated here -->
+        </div>
+        <button class="pagination-button" id="nextPage">
+          Next <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
     </section>
   </main>
@@ -189,199 +196,412 @@
     </div>
   </footer>
 
-  <!-- Login notification -->
-  <div class="notification notification-error" id="loginNotification">
-    <div class="notification-icon">
-      <i class="fas fa-exclamation-circle"></i>
-    </div>
-    <div class="notification-content">
-      <div class="notification-title">Please sign in</div>
-      <div class="notification-message">You need to be signed in to add items to cart</div>
-    </div>
-    <button class="notification-close" onclick="hideNotification('loginNotification')">
-      <i class="fas fa-times"></i>
-    </button>
-  </div>
-
-  <!-- Added to cart notification -->
-  <div class="notification notification-success" id="addedToCartNotification">
-    <div class="notification-icon">
-      <i class="fas fa-check-circle"></i>
-    </div>
-    <div class="notification-content">
-      <div class="notification-title">Added to cart!</div>
-      <div class="notification-message" id="cartNotificationMessage"></div>
-    </div>
-    <button class="notification-close" onclick="hideNotification('addedToCartNotification')">
-      <i class="fas fa-times"></i>
-    </button>
+  <!-- Sign In Required Modal -->
+  <div class="signin-overlay" id="signinOverlay"></div>
+  <div class="signin-required" id="signinRequired">
+    <h3>Sign In Required</h3>
+    <p>Please sign in to add items to your cart and make purchases.</p>
+    <a href="login.html" class="btn btn-primary">Sign In Now</a>
+    <button class="btn btn-outline" style="margin-top: 0.5rem;" onclick="closeSigninModal()">Cancel</button>
   </div>
 
   <script>
     // Sample product data
     const products = [
-      { id: 1, name: "Wild Forest Honey", price: 450, imageSrc: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", isNew: true, description: "100% pure, ethically sourced wild forest honey packed with natural goodness." },
-      { id: 2, name: "Lavender Handmade Soap", price: 250, imageSrc: "https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", isBestSeller: true, description: "Handcrafted soap made with organic oils and pure lavender essential oil." },
-      { id: 3, name: "Bamboo Toothbrush Set", price: 350, imageSrc: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80", category: "Home & Living", description: "Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4." },
-      { id: 4, name: "Herbal Tea Collection", price: 550, imageSrc: "https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", category: "Food & Beverages", description: "Premium collection of organic herbal teas from the Himalayan region." },
-      { id: 5, name: "Virgin Coconut Oil", price: 400, imageSrc: "https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", description: "Cold-pressed virgin coconut oil for cooking and skincare. 500ml glass jar." },
-      { id: 6, name: "Beeswax Food Wraps", price: 600, imageSrc: "https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Home & Living", isBestSeller: true, description: "Reusable food wraps made with organic cotton, beeswax, and jojoba oil. Set of 3." },
-      { id: 7, name: "Aloe Vera Face Cream", price: 750, imageSrc: "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", isNew: true, description: "Hydrating face cream with organic aloe vera, shea butter, and essential oils." },
-      { id: 8, name: "Single Origin Coffee", price: 500, imageSrc: "https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", description: "Shade-grown, organic coffee beans from the hills of Coorg. Medium roast, 250g." },
+      {
+        id: 1,
+        name: "Organic Honey",
+        description: "Pure, raw honey from organically raised bees without antibiotics or pesticides.",
+        price: 349,
+        imageSrc: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: true,
+        isBestSeller: false
+      },
+      {
+        id: 2,
+        name: "Natural Face Serum",
+        description: "Made with organic plant extracts to hydrate and rejuvenate your skin.",
+        price: 899,
+        imageSrc: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "beauty",
+        isNew: false,
+        isBestSeller: true
+      },
+      {
+        id: 3,
+        name: "Bamboo Toothbrush Set",
+        description: "Pack of 4 biodegradable toothbrushes with charcoal-infused bristles.",
+        price: 299,
+        imageSrc: "https://images.unsplash.com/photo-1610535817573-0acff1d8294e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "home",
+        isNew: false,
+        isBestSeller: false
+      },
+      {
+        id: 4,
+        name: "Organic Green Tea",
+        description: "Premium loose leaf green tea, grown without pesticides.",
+        price: 199,
+        imageSrc: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: false,
+        isBestSeller: true
+      },
+      {
+        id: 5,
+        name: "Natural Shampoo Bar",
+        description: "Zero-waste solid shampoo with essential oils and no harsh chemicals.",
+        price: 249,
+        imageSrc: "https://images.unsplash.com/photo-1584305574647-0cc949a2bb9f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "beauty",
+        isNew: true,
+        isBestSeller: false
+      },
+      {
+        id: 6,
+        name: "Reusable Produce Bags",
+        description: "Set of 6 mesh bags in various sizes for plastic-free grocery shopping.",
+        price: 399,
+        imageSrc: "https://images.unsplash.com/photo-1610535585486-e1fe8a0cfc93?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "home",
+        isNew: false,
+        isBestSeller: false
+      },
+      {
+        id: 7,
+        name: "Organic Coconut Oil",
+        description: "Cold-pressed, unrefined coconut oil for cooking and beauty uses.",
+        price: 449,
+        imageSrc: "https://images.unsplash.com/photo-1590301157890-4810ed352733?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: false,
+        isBestSeller: true
+      },
+      {
+        id: 8,
+        name: "Herbal Face Mask",
+        description: "Clay-based mask with herbs and essential oils for deep cleansing.",
+        price: 649,
+        imageSrc: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "beauty",
+        isNew: true,
+        isBestSeller: false
+      },
+      // More products for pagination
+      {
+        id: 9,
+        name: "Organic Chia Seeds",
+        description: "Nutrient-rich superfood packed with omega-3 fatty acids.",
+        price: 279,
+        imageSrc: "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: false,
+        isBestSeller: false
+      },
+      {
+        id: 10,
+        name: "Natural Deodorant",
+        description: "Aluminum-free deodorant made with essential oils and plant extracts.",
+        price: 349,
+        imageSrc: "https://images.unsplash.com/photo-1617187867272-182d1c3f1f9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "beauty",
+        isNew: false,
+        isBestSeller: false
+      },
+      {
+        id: 11,
+        name: "Beeswax Food Wraps",
+        description: "Reusable, eco-friendly alternative to plastic wrap for food storage.",
+        price: 599,
+        imageSrc: "https://images.unsplash.com/photo-1589461207515-8a0a11c0c319?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "home",
+        isNew: true,
+        isBestSeller: false
+      },
+      {
+        id: 12,
+        name: "Herbal Stress Relief Tea",
+        description: "Calming blend of organic herbs to reduce stress and promote relaxation.",
+        price: 249,
+        imageSrc: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: false,
+        isBestSeller: true
+      }
     ];
 
-    // Display products
+    // Pagination and display logic
+    const itemsPerPage = 8;
+    let currentPage = 1;
+    let filteredProducts = [...products];
+    
     function displayProducts() {
-      const productsContainer = document.getElementById('products-container');
-      productsContainer.innerHTML = '';
+      const productGrid = document.getElementById('productGrid');
+      productGrid.innerHTML = '';
       
-      products.forEach(product => {
+      // Calculate start and end indices for current page
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = Math.min(startIndex + itemsPerPage, filteredProducts.length);
+      
+      // Get products for current page
+      const currentProducts = filteredProducts.slice(startIndex, endIndex);
+      
+      // Check if no products match filter
+      if (currentProducts.length === 0) {
+        productGrid.innerHTML = '<div class="no-products">No products found. Try a different category.</div>';
+        return;
+      }
+      
+      // Loop through products and create elements
+      currentProducts.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
+        
+        // Format price in Indian Rupees
+        const formattedPrice = product.price.toLocaleString('en-IN');
+        
         productCard.innerHTML = `
+          <a href="product.html?id=${product.id}" class="card-link"></a>
           <div class="product-image">
-            <img src="${product.imageSrc}" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('fallback-image');">
+            <img src="${product.imageSrc}" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
             <div class="product-badges">
               ${product.isNew ? '<span class="badge badge-new">New</span>' : ''}
               ${product.isBestSeller ? '<span class="badge badge-bestseller">Best Seller</span>' : ''}
             </div>
           </div>
           <div class="product-details">
-            <div class="product-category">${product.category}</div>
-            <h3 class="product-title">
-              <a href="product.html?id=${product.id}">${product.name}</a>
-            </h3>
+            <div class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
+            <h3 class="product-title">${product.name}</h3>
             <p class="product-description">${product.description}</p>
             <div class="product-footer">
-              <div class="product-price">₹${product.price.toLocaleString()}</div>
-              <button class="btn-add" onclick="event.stopPropagation(); addToCart(${product.id})">
-                <i class="fas fa-shopping-cart"></i>
-                Add
+              <div class="product-price"><span class="currency-symbol">₹</span>${formattedPrice}</div>
+              <button class="btn-add" onclick="handleAddToCart(event, ${product.id})">
+                <i class="fas fa-shopping-cart"></i> Add
               </button>
             </div>
           </div>
         `;
         
-        // Make the whole card clickable
-        productCard.addEventListener('click', function() {
-          window.location.href = `product.html?id=${product.id}`;
-        });
-        
-        productsContainer.appendChild(productCard);
+        productGrid.appendChild(productCard);
       });
       
-      // Update product count
-      document.getElementById('productCount').textContent = `Showing ${products.length} products`;
+      // Update pagination
+      updatePagination();
     }
-
-    // Call on page load
-    displayProducts();
-
-    // Mobile menu toggle
-    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    });
-
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Check if user is signed in
-    function isUserSignedIn() {
-      return localStorage.getItem('isSignedIn') === 'true';
-    }
-
-    // Update sign in button
-    function updateSignInButton() {
-      const signInButton = document.getElementById('signInButton');
-      const mobileSignInButton = document.getElementById('mobileSignInButton');
-      
-      if (isUserSignedIn()) {
-        signInButton.textContent = 'Sign Out';
-        signInButton.href = '#';
-        signInButton.onclick = function(e) {
-          e.preventDefault();
-          localStorage.removeItem('isSignedIn');
-          location.reload();
-        };
-        
-        mobileSignInButton.textContent = 'Sign Out';
-        mobileSignInButton.href = '#';
-        mobileSignInButton.onclick = function(e) {
-          e.preventDefault();
-          localStorage.removeItem('isSignedIn');
-          location.reload();
-        };
-      }
-    }
-
-    // Call on page load
-    updateSignInButton();
     
-    // Add to cart function
-    function addToCart(productId) {
+    function updatePagination() {
+      const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+      const pagination = document.getElementById('pagination');
+      const pageButtons = document.getElementById('pageButtons');
+      const prevButton = document.getElementById('prevPage');
+      const nextButton = document.getElementById('nextPage');
+      
+      // Clear existing buttons
+      pageButtons.innerHTML = '';
+      
+      // Create page buttons (show max 5 page numbers)
+      const maxPagesToShow = 5;
+      let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+      let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+      
+      // Adjust start page if we're near the end
+      if (endPage - startPage + 1 < maxPagesToShow) {
+        startPage = Math.max(1, endPage - maxPagesToShow + 1);
+      }
+      
+      // Add first page button if not included
+      if (startPage > 1) {
+        const firstPageBtn = document.createElement('button');
+        firstPageBtn.className = 'pagination-button';
+        firstPageBtn.textContent = '1';
+        firstPageBtn.addEventListener('click', () => goToPage(1));
+        pageButtons.appendChild(firstPageBtn);
+        
+        // Add ellipsis if needed
+        if (startPage > 2) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.margin = '0 0.25rem';
+          pageButtons.appendChild(ellipsis);
+        }
+      }
+      
+      // Add numbered page buttons
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = i === currentPage ? 'pagination-button active' : 'pagination-button';
+        pageBtn.textContent = i.toString();
+        pageBtn.addEventListener('click', () => goToPage(i));
+        pageButtons.appendChild(pageBtn);
+      }
+      
+      // Add last page button if not included
+      if (endPage < totalPages) {
+        // Add ellipsis if needed
+        if (endPage < totalPages - 1) {
+          const ellipsis = document.createElement('span');
+          ellipsis.textContent = '...';
+          ellipsis.style.margin = '0 0.25rem';
+          pageButtons.appendChild(ellipsis);
+        }
+        
+        const lastPageBtn = document.createElement('button');
+        lastPageBtn.className = 'pagination-button';
+        lastPageBtn.textContent = totalPages.toString();
+        lastPageBtn.addEventListener('click', () => goToPage(totalPages));
+        pageButtons.appendChild(lastPageBtn);
+      }
+      
+      // Update prev/next buttons
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+      
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          goToPage(currentPage - 1);
+        }
+      });
+      
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          goToPage(currentPage + 1);
+        }
+      });
+      
+      // Hide pagination if only one page
+      pagination.style.display = totalPages <= 1 ? 'none' : 'flex';
+    }
+    
+    function goToPage(page) {
+      currentPage = page;
+      displayProducts();
+      // Scroll to top of products when changing page
+      document.querySelector('.section-title').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function filterProducts() {
+      // Get current category from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const category = urlParams.get('category');
+      
+      // Filter products based on category
+      if (category) {
+        filteredProducts = products.filter(product => product.category === category);
+        // Update active filter button
+        document.querySelectorAll('.filter-button').forEach(button => {
+          button.classList.remove('active');
+        });
+        document.querySelector(`.filter-button[href*="category=${category}"]`)?.classList.add('active');
+      } else {
+        filteredProducts = [...products];
+        // Set "All" as active
+        document.querySelectorAll('.filter-button').forEach(button => {
+          button.classList.remove('active');
+        });
+        document.querySelector('.filter-button[href="products.html"]').classList.add('active');
+      }
+      
+      // Reset to first page when filter changes
+      currentPage = 1;
+      displayProducts();
+    }
+    
+    // Handle adding to cart
+    function handleAddToCart(event, productId) {
+      event.preventDefault();
+      event.stopPropagation();
+      
       // Check if user is signed in
       if (!isUserSignedIn()) {
-        // Show login notification
-        const notification = document.getElementById('loginNotification');
-        notification.classList.add('show');
-        
-        // Auto hide after 3 seconds
-        setTimeout(() => {
-          hideNotification('loginNotification');
-        }, 3000);
+        showSigninModal();
         return;
       }
       
-      // Get product details
+      // Find the product
       const product = products.find(p => p.id === productId);
       if (!product) return;
       
-      // Get existing cart items from localStorage or initialize empty array
-      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      // Get existing cart items
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
       
       // Check if product is already in cart
-      const existingItemIndex = existingCartItems.findIndex(item => item.id === productId);
+      const existingItemIndex = cartItems.findIndex(item => item.id === productId);
       
       if (existingItemIndex !== -1) {
-        // If product exists, increment quantity
-        existingCartItems[existingItemIndex].quantity += 1;
-        showAddedToCartNotification(`Increased ${product.name} quantity in cart`);
+        // Increase quantity if already in cart
+        cartItems[existingItemIndex].quantity += 1;
       } else {
-        // Add new product to cart
-        existingCartItems.push({
+        // Add new item to cart
+        cartItems.push({
           id: product.id,
           name: product.name,
           price: product.price,
           quantity: 1,
-          imageSrc: product.imageSrc,
+          imageSrc: product.imageSrc
         });
-        showAddedToCartNotification(`${product.name} added to cart successfully!`);
       }
       
       // Save updated cart to localStorage
-      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
       
       // Update cart count
       updateCartCount();
+      
+      // Show confirmation notification
+      showNotification(`${product.name} added to cart!`);
     }
-
-    function showAddedToCartNotification(message) {
-      document.getElementById('cartNotificationMessage').textContent = message;
-      const notification = document.getElementById('addedToCartNotification');
+    
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+    
+    // Show sign in modal
+    function showSigninModal() {
+      document.getElementById('signinOverlay').classList.add('show');
+      document.getElementById('signinRequired').classList.add('show');
+    }
+    
+    // Close sign in modal
+    function closeSigninModal() {
+      document.getElementById('signinOverlay').classList.remove('show');
+      document.getElementById('signinRequired').classList.remove('show');
+    }
+    
+    // Show notification
+    function showNotification(message) {
+      // Create notification element if it doesn't exist
+      let notification = document.getElementById('notification');
+      if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.className = 'notification notification-success';
+        notification.innerHTML = `
+          <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-message"></div>
+          </div>
+          <button class="notification-close" onclick="this.parentNode.classList.remove('show')">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        document.body.appendChild(notification);
+      }
+      
+      // Update message and show
+      notification.querySelector('.notification-message').textContent = message;
       notification.classList.add('show');
       
-      // Auto hide after 3 seconds
+      // Auto-hide after 3 seconds
       setTimeout(() => {
-        hideNotification('addedToCartNotification');
+        notification.classList.remove('show');
       }, 3000);
     }
-
-    function hideNotification(id) {
-      const notification = document.getElementById(id);
-      notification.classList.remove('show');
-    }
-
-    // Update the cart count based on local storage
+    
+    // Update cart count
     function updateCartCount() {
       const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const count = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -391,39 +611,71 @@
         element.textContent = count;
       });
     }
-
-    // Call on page load
-    updateCartCount();
-
+    
     // Sort products
-    document.getElementById('sort').addEventListener('change', function() {
+    document.getElementById('sortSelect').addEventListener('change', function() {
       const sortValue = this.value;
       
-      if (sortValue === 'price-low') {
-        products.sort((a, b) => a.price - b.price);
-      } else if (sortValue === 'price-high') {
-        products.sort((a, b) => b.price - a.price);
-      } else if (sortValue === 'newest') {
-        // For this example, we'll just use the isNew property to sort
-        products.sort((a, b) => {
-          if (a.isNew && !b.isNew) return -1;
-          if (!a.isNew && b.isNew) return 1;
-          return 0;
-        });
-      } else {
-        // Featured: Sort by isBestSeller first, then isNew
-        products.sort((a, b) => {
-          if (a.isBestSeller && !b.isBestSeller) return -1;
-          if (!a.isBestSeller && b.isBestSeller) return 1;
-          if (a.isNew && !b.isNew) return -1;
-          if (!a.isNew && b.isNew) return 1;
-          return 0;
-        });
+      switch (sortValue) {
+        case 'newest':
+          // For demo, just reverse the array to simulate "newest"
+          filteredProducts.reverse();
+          break;
+        case 'price-low':
+          filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          filteredProducts.sort((a, b) => b.price - a.price);
+          break;
+        case 'featured':
+        default:
+          // For demo, sort by id to reset to original order
+          filteredProducts.sort((a, b) => a.id - b.id);
+          break;
       }
       
+      currentPage = 1;
       displayProducts();
+    });
+    
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+    
+    // Update sign in button based on login status
+    function updateSignInButton() {
+      const signInButton = document.getElementById('signInButton');
+      if (isUserSignedIn()) {
+        signInButton.innerHTML = '<i class="fas fa-sign-out-alt"></i> Sign Out';
+        signInButton.href = 'javascript:void(0)';
+        signInButton.onclick = function() {
+          localStorage.removeItem('isSignedIn');
+          updateSignInButton();
+          updateCartCount();
+          showNotification('Signed out successfully');
+        };
+      } else {
+        signInButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        signInButton.href = 'login.html';
+        signInButton.onclick = null;
+      }
+    }
+    
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      filterProducts(); // This also calls displayProducts()
+      updateCartCount();
+      updateSignInButton();
+    });
+    
+    // Listen for back/forward navigation
+    window.addEventListener('popstate', function() {
+      filterProducts();
     });
   </script>
 </body>
 </html>
-

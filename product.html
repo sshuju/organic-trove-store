@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Detail | OrganicTrove</title>
-  <meta name="description" content="View details of our organic and sustainable products." />
+  <meta name="description" content="Detailed information about our organic, sustainable products at OrganicTrove." />
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
   <!-- Font Awesome for icons -->
@@ -21,7 +20,7 @@
       <nav class="nav-desktop">
         <a href="index.html">Home</a>
         <div class="dropdown">
-          <a href="products.html" class="active">Products <i class="fas fa-chevron-down"></i></a>
+          <a href="products.html">Products <i class="fas fa-chevron-down"></i></a>
           <div class="dropdown-menu">
             <a href="products.html">All Products</a>
             <a href="products.html?category=food">Food & Beverages</a>
@@ -41,7 +40,9 @@
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">0</span>
         </a>
-        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">Sign In</a>
+        <a href="login.html" class="btn btn-outline btn-desktop" id="signInButton">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </a>
         <button class="nav-mobile-toggle">
           <i class="fas fa-bars"></i>
         </button>
@@ -50,121 +51,55 @@
     
     <div class="nav-mobile" id="mobileMenu">
       <a href="index.html">Home</a>
-      <a href="products.html" class="active">Products</a>
+      <a href="products.html">Products</a>
       <a href="about.html">About</a>
       <a href="help.html">Help</a>
-      <a href="login.html" id="mobileSignInButton">Sign In</a>
+      <a href="login.html">Sign In</a>
     </div>
   </header>
 
-  <main class="product-detail-section">
-    <div class="container">
-      <div class="breadcrumbs">
-        <a href="index.html">Home</a>
-        <span class="breadcrumb-separator">/</span>
-        <a href="products.html">Products</a>
-        <span class="breadcrumb-separator">/</span>
-        <span id="product-breadcrumb-name">Product Name</span>
-      </div>
-      
-      <div class="product-detail-grid">
-        <div class="product-gallery">
-          <div class="product-main-image">
-            <img id="product-main-image" src="" alt="Product Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('fallback-image');">
-          </div>
-          <div class="product-thumbnails" id="product-thumbnails">
-            <!-- Thumbnails will be added dynamically -->
-          </div>
+  <main>
+    <section class="product-detail-section">
+      <div class="page-container">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="products.html">Products</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="#" id="productCategoryLink">Category</a>
+          <span class="breadcrumb-separator">/</span>
+          <span id="productNameBreadcrumb">Product Name</span>
         </div>
         
-        <div class="product-info">
-          <div class="product-info-header">
-            <div class="product-badges" id="product-badges">
-              <!-- Badges will be added dynamically -->
-            </div>
-            <h1 class="product-info-title" id="product-title">Product Name</h1>
-            <div class="product-info-price" id="product-price">₹0</div>
+        <div class="product-detail-grid" id="productDetail">
+          <!-- Product detail will be loaded here via JavaScript -->
+          <div class="loading">Loading product details...</div>
+        </div>
+        
+        <div class="product-tabs">
+          <div class="tabs-header">
+            <button class="tab-button active" data-tab="description">Description</button>
+            <button class="tab-button" data-tab="details">Details & Specs</button>
+            <button class="tab-button" data-tab="reviews">Reviews</button>
           </div>
           
-          <div class="product-info-description" id="product-description">
-            Loading product description...
-          </div>
-          
-          <div class="product-form">
-            <div class="product-actions">
-              <div class="quantity-input product-quantity">
-                <button class="quantity-btn" onclick="decrementQuantity()">-</button>
-                <input type="text" class="quantity-value" id="quantity" value="1" readonly>
-                <button class="quantity-btn" onclick="incrementQuantity()">+</button>
-              </div>
-              <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">
-                <i class="fas fa-shopping-cart"></i>
-                Add to Cart
-              </button>
+          <div class="tab-content" id="tabContent">
+            <div id="descriptionTab">
+              <h3>Product Description</h3>
+              <div id="productFullDescription"></div>
             </div>
           </div>
-          
-          <div class="product-meta">
-            <p><span>Category:</span> <span id="product-category">Loading...</span></p>
-            <p><span>SKU:</span> <span id="product-sku">Loading...</span></p>
-            <p><span>Availability:</span> <span id="product-availability">In Stock</span></p>
-          </div>
+        </div>
+        
+        <div class="section-title" style="margin-top: 4rem;">
+          <h2>You May Also Like</h2>
+        </div>
+        
+        <div class="product-grid" id="relatedProducts">
+          <!-- Related products will be loaded here -->
         </div>
       </div>
-      
-      <div class="product-tabs">
-        <div class="tabs-header">
-          <button class="tab-button active" onclick="openTab('description')">Description</button>
-          <button class="tab-button" onclick="openTab('additional')">Additional Information</button>
-          <button class="tab-button" onclick="openTab('reviews')">Reviews</button>
-        </div>
-        
-        <div class="tab-content" id="description-tab">
-          <h3>Product Description</h3>
-          <div id="full-description">
-            Loading full description...
-          </div>
-        </div>
-        
-        <div class="tab-content" id="additional-tab" style="display: none;">
-          <h3>Additional Information</h3>
-          <div class="additional-info">
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">Weight</th>
-                <td style="padding: 10px; border-bottom: 1px solid #eee;" id="product-weight">250g</td>
-              </tr>
-              <tr>
-                <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">Dimensions</th>
-                <td style="padding: 10px; border-bottom: 1px solid #eee;" id="product-dimensions">10 × 5 × 5 cm</td>
-              </tr>
-              <tr>
-                <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">Ingredients</th>
-                <td style="padding: 10px; border-bottom: 1px solid #eee;" id="product-ingredients">100% Organic Ingredients</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        
-        <div class="tab-content" id="reviews-tab" style="display: none;">
-          <h3>Customer Reviews</h3>
-          <div class="reviews-section">
-            <p>No reviews yet.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div style="margin-top: 4rem;">
-        <div class="section-title">
-          <h2>Related Products</h2>
-          <p>You might also like these products</p>
-        </div>
-        
-        <div class="product-grid" id="related-products">
-          <!-- Related products will be added dynamically -->
-        </div>
-      </div>
-    </div>
+    </section>
   </main>
 
   <footer>
@@ -259,287 +194,334 @@
     </div>
   </footer>
 
-  <!-- Added to cart notification -->
-  <div class="notification notification-success" id="addedToCartNotification">
-    <div class="notification-icon">
-      <i class="fas fa-check-circle"></i>
-    </div>
-    <div class="notification-content">
-      <div class="notification-title">Added to cart!</div>
-      <div class="notification-message" id="cartNotificationMessage"></div>
-    </div>
-    <button class="notification-close" onclick="hideNotification('addedToCartNotification')">
-      <i class="fas fa-times"></i>
-    </button>
+  <!-- Sign In Required Modal -->
+  <div class="signin-overlay" id="signinOverlay"></div>
+  <div class="signin-required" id="signinRequired">
+    <h3>Sign In Required</h3>
+    <p>Please sign in to add items to your cart and make purchases.</p>
+    <a href="login.html" class="btn btn-primary">Sign In Now</a>
+    <button class="btn btn-outline" style="margin-top: 0.5rem;" onclick="closeSigninModal()">Cancel</button>
   </div>
 
   <script>
-    // Mobile menu toggle
-    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    });
-
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Get product ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get('id'));
-
-    // Sample product data
+    // Sample product data (same as products.html for consistency)
     const products = [
-      { id: 1, name: "Wild Forest Honey", price: 450, imageSrc: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", isNew: true, description: "100% pure, ethically sourced wild forest honey packed with natural goodness.", fullDescription: "Our Wild Forest Honey is collected from remote forest areas, ensuring the highest quality and purity. Bees forage freely on wildflowers, resulting in a rich, complex flavor profile that varies with the seasons. Packed with natural enzymes, antioxidants, and minerals, this honey offers numerous health benefits. Each jar is raw and unprocessed, preserving all its natural goodness.", sku: "FD-001", weight: "500g", dimensions: "8 × 8 × 12 cm", ingredients: "100% Raw Forest Honey" },
-      { id: 2, name: "Lavender Handmade Soap", price: 250, imageSrc: "https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", isBestSeller: true, description: "Handcrafted soap made with organic oils and pure lavender essential oil.", fullDescription: "Our Lavender Handmade Soap is crafted in small batches using traditional cold-process methods. Made with organic oils including olive, coconut, and shea butter, this soap gently cleanses while moisturizing your skin. The calming aroma of pure lavender essential oil helps reduce stress and promotes relaxation. Free from harsh chemicals, synthetic fragrances, and preservatives.", sku: "BC-001", weight: "100g", dimensions: "7 × 5 × 2 cm", ingredients: "Organic Olive Oil, Organic Coconut Oil, Organic Shea Butter, Lavender Essential Oil, Dried Lavender Flowers" },
-      { id: 3, name: "Bamboo Toothbrush Set", price: 350, imageSrc: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80", category: "Home & Living", description: "Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4.", fullDescription: "Our Bamboo Toothbrush Set includes four eco-friendly toothbrushes made from sustainably harvested bamboo. The handles are biodegradable and compostable, reducing plastic waste. The bristles are made from BPA-free nylon that's gentle on your gums and teeth. Each toothbrush in the pack is individually numbered, making it perfect for family use. Make the switch to bamboo and reduce your environmental footprint.", sku: "HL-001", weight: "80g", dimensions: "19 × 3 × 2 cm", ingredients: "Sustainably Harvested Bamboo, BPA-Free Nylon Bristles" },
-      { id: 4, name: "Herbal Tea Collection", price: 550, imageSrc: "https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", category: "Food & Beverages", description: "Premium collection of organic herbal teas from the Himalayan region.", fullDescription: "Our Herbal Tea Collection features five premium organic herbal teas sourced from the pristine Himalayan region. Each tea is carefully selected for its unique flavor profile and health benefits. The collection includes Chamomile, Mint, Hibiscus, Lemongrass, and Tulsi (Holy Basil). All teas are free from artificial flavors, colors, and preservatives. Packaged in biodegradable tea bags, this collection makes a perfect gift for tea lovers.", sku: "FD-002", weight: "250g", dimensions: "15 × 10 × 5 cm", ingredients: "Organic Chamomile, Organic Mint, Organic Hibiscus, Organic Lemongrass, Organic Tulsi (Holy Basil)" },
-      { id: 5, name: "Virgin Coconut Oil", price: 400, imageSrc: "https://images.unsplash.com/photo-1611071355232-e2c9130d2a6b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", description: "Cold-pressed virgin coconut oil for cooking and skincare. 500ml glass jar.", fullDescription: "Our Virgin Coconut Oil is cold-pressed from fresh, organic coconuts without the use of heat or chemicals. This versatile oil can be used for cooking, baking, as a butter substitute, or as a natural beauty product for skin and hair care. Rich in medium-chain fatty acids and antioxidants, it offers numerous health benefits. Packaged in a reusable glass jar, this multi-purpose oil is a must-have in every household.", sku: "BC-002", weight: "500g", dimensions: "8 × 8 × 10 cm", ingredients: "100% Organic Cold-Pressed Virgin Coconut Oil" },
-      { id: 6, name: "Beeswax Food Wraps", price: 600, imageSrc: "https://images.unsplash.com/photo-1596130783472-e687aff9070e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Home & Living", isBestSeller: true, description: "Reusable food wraps made with organic cotton, beeswax, and jojoba oil. Set of 3.", fullDescription: "Our Beeswax Food Wraps are a sustainable alternative to plastic wrap. Made with organic cotton, locally sourced beeswax, tree resin, and organic jojoba oil, these wraps are perfect for covering bowls, wrapping cheese, fruits, vegetables, and sandwiches. The set includes three different sizes: small (8\"×8\"), medium (11\"×11\"), and large (14\"×14\"). They're washable, reusable for up to a year, and fully biodegradable. Say goodbye to single-use plastic with these eco-friendly food wraps.", sku: "HL-002", weight: "150g", dimensions: "30 × 30 × 1 cm", ingredients: "Organic Cotton, Sustainably Harvested Beeswax, Tree Resin, Organic Jojoba Oil" },
-      { id: 7, name: "Aloe Vera Face Cream", price: 750, imageSrc: "https://images.unsplash.com/photo-1586999768265-24af89630739?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", isNew: true, description: "Hydrating face cream with organic aloe vera, shea butter, and essential oils.", fullDescription: "Our Aloe Vera Face Cream is a hydrating moisturizer suitable for all skin types. Enriched with organic aloe vera, shea butter, rosehip oil, and essential oils, it deeply nourishes and rejuvenates your skin. Regular use helps improve skin elasticity, reduce fine lines, and maintain a healthy glow. The cream is non-greasy, absorbs quickly, and provides all-day hydration. Free from parabens, sulfates, and artificial fragrances, it's gentle even on sensitive skin.", sku: "BC-003", weight: "100g", dimensions: "7 × 7 × 5 cm", ingredients: "Organic Aloe Vera Gel, Organic Shea Butter, Organic Rosehip Oil, Vitamin E, Essential Oils of Lavender and Rose Geranium" },
-      { id: 8, name: "Single Origin Coffee", price: 500, imageSrc: "https://images.unsplash.com/photo-1550125637-dd2bb1932786?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", description: "Shade-grown, organic coffee beans from the hills of Coorg. Medium roast, 250g.", fullDescription: "Our Single Origin Coffee beans are grown in the shaded slopes of Coorg, India, at an altitude of 3,500 feet. These Arabica beans are grown using traditional farming methods without chemical pesticides or fertilizers. Medium roasted to perfection, these beans offer a balanced flavor profile with notes of chocolate, caramel, and mild citrus. Each batch is roasted in small quantities to ensure freshness and quality. Packaged in a resealable bag with a one-way valve to preserve freshness.", sku: "FD-003", weight: "250g", dimensions: "15 × 8 × 5 cm", ingredients: "100% Organic Arabica Coffee Beans" },
+      {
+        id: 1,
+        name: "Organic Honey",
+        description: "Pure, raw honey from organically raised bees without antibiotics or pesticides.",
+        fullDescription: "Our organic honey is harvested from hives placed in pristine organic farms free from pesticides and chemicals. The bees are never treated with antibiotics, and the honey is minimally processed to retain all of its natural enzymes, antioxidants, and beneficial properties. With its rich amber color and distinctive floral notes, this honey is perfect for sweetening tea, drizzling over yogurt, or spreading on toast.",
+        price: 349,
+        imageSrc: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "food",
+        isNew: true,
+        isBestSeller: false,
+        weight: "250g",
+        origin: "Western Ghats, India",
+        organic: true,
+        images: [
+          "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1471943311424-646960669fbc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+        ]
+      },
+      {
+        id: 2,
+        name: "Natural Face Serum",
+        description: "Made with organic plant extracts to hydrate and rejuvenate your skin.",
+        fullDescription: "Our natural face serum is formulated with a blend of organic botanical extracts, vitamins, and essential oils to nourish and revitalize your skin. Key ingredients include hyaluronic acid for deep hydration, vitamin C for brightening, and rosehip oil to reduce fine lines. The lightweight, non-greasy formula absorbs quickly and works for all skin types. Free from parabens, sulfates, and synthetic fragrances.",
+        price: 899,
+        imageSrc: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        category: "beauty",
+        isNew: false,
+        isBestSeller: true,
+        volume: "30ml",
+        skinType: "All skin types",
+        vegan: true,
+        images: [
+          "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1570194065650-d99fb4cd5150?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+        ]
+      }
+      // Add more products as needed with similar details
     ];
-
-    // Get related products (excluding current product)
-    function getRelatedProducts(currentProductId, category) {
-      return products
-        .filter(product => product.id !== currentProductId && product.category === category)
-        .slice(0, 4); // Get at most 4 related products
+    
+    // Get product ID from URL
+    function getProductId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = parseInt(urlParams.get('id'));
+      return isNaN(id) ? 1 : id; // Default to first product if ID is invalid
     }
-
-    // Function to display product details
-    function displayProductDetails() {
-      if (!productId) {
-        window.location.href = 'products.html';
-        return;
-      }
-
-      const product = products.find(p => p.id === productId);
+    
+    // Load product details
+    function loadProductDetails() {
+      const productId = getProductId();
+      const product = products.find(p => p.id === productId) || products[0];
       
-      if (!product) {
-        window.location.href = 'products.html';
-        return;
-      }
-
+      // Format price in Indian Rupees
+      const formattedPrice = product.price.toLocaleString('en-IN');
+      
       // Update page title
       document.title = `${product.name} | OrganicTrove`;
       
-      // Update breadcrumb
-      document.getElementById('product-breadcrumb-name').textContent = product.name;
+      // Update breadcrumbs
+      document.getElementById('productCategoryLink').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+      document.getElementById('productCategoryLink').href = `products.html?category=${product.category}`;
+      document.getElementById('productNameBreadcrumb').textContent = product.name;
       
-      // Update main image
-      const mainImage = document.getElementById('product-main-image');
-      mainImage.src = product.imageSrc;
-      mainImage.alt = product.name;
-      
-      // Update badges
-      const badgesContainer = document.getElementById('product-badges');
-      badgesContainer.innerHTML = '';
-      
-      if (product.isNew) {
-        const newBadge = document.createElement('span');
-        newBadge.className = 'badge badge-new';
-        newBadge.textContent = 'New';
-        badgesContainer.appendChild(newBadge);
-      }
-      
-      if (product.isBestSeller) {
-        const bestSellerBadge = document.createElement('span');
-        bestSellerBadge.className = 'badge badge-bestseller';
-        bestSellerBadge.textContent = 'Best Seller';
-        badgesContainer.appendChild(bestSellerBadge);
-      }
-      
-      // Update product info
-      document.getElementById('product-title').textContent = product.name;
-      document.getElementById('product-price').textContent = `₹${product.price.toLocaleString()}`;
-      document.getElementById('product-description').textContent = product.description;
-      document.getElementById('full-description').textContent = product.fullDescription;
-      document.getElementById('product-category').textContent = product.category;
-      document.getElementById('product-sku').textContent = product.sku;
-      document.getElementById('product-weight').textContent = product.weight;
-      document.getElementById('product-dimensions').textContent = product.dimensions;
-      document.getElementById('product-ingredients').textContent = product.ingredients;
-      
-      // Display related products
-      const relatedProducts = getRelatedProducts(product.id, product.category);
-      const relatedProductsContainer = document.getElementById('related-products');
-      relatedProductsContainer.innerHTML = '';
-      
-      relatedProducts.forEach(relatedProduct => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.innerHTML = `
-          <div class="product-image">
-            <img src="${relatedProduct.imageSrc}" alt="${relatedProduct.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('fallback-image');">
-            <div class="product-badges">
-              ${relatedProduct.isNew ? '<span class="badge badge-new">New</span>' : ''}
-              ${relatedProduct.isBestSeller ? '<span class="badge badge-bestseller">Best Seller</span>' : ''}
-            </div>
+      // Build product detail HTML
+      const productDetailHtml = `
+        <div class="product-gallery">
+          <div class="product-main-image">
+            <img id="mainProductImage" src="${product.images ? product.images[0] : product.imageSrc}" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80';">
           </div>
-          <div class="product-details">
-            <div class="product-category">${relatedProduct.category}</div>
-            <h3 class="product-title">
-              <a href="product.html?id=${relatedProduct.id}">${relatedProduct.name}</a>
-            </h3>
-            <p class="product-description">${relatedProduct.description}</p>
-            <div class="product-footer">
-              <div class="product-price">₹${relatedProduct.price.toLocaleString()}</div>
-              <button class="btn-add" onclick="event.stopPropagation(); addToCartFromRelated(${relatedProduct.id})">
-                <i class="fas fa-shopping-cart"></i>
-                Add
+          ${product.images ? `
+            <div class="product-thumbnails">
+              ${product.images.map((img, index) => `
+                <div class="product-thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage(event, '${img}', this)">
+                  <img src="${img}" alt="${product.name} image ${index + 1}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80';">
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+        <div class="product-info">
+          <div class="product-info-header">
+            <div class="product-badges">
+              ${product.isNew ? '<span class="badge badge-new">New</span>' : ''}
+              ${product.isBestSeller ? '<span class="badge badge-bestseller">Best Seller</span>' : ''}
+            </div>
+            <h1 class="product-info-title">${product.name}</h1>
+            <div class="product-info-price"><span class="currency-symbol">₹</span>${formattedPrice}</div>
+            <div class="product-info-description">${product.description}</div>
+          </div>
+          
+          <div class="product-form">
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <div class="quantity-input">
+                <button type="button" class="quantity-btn" onclick="decrementQuantity()">-</button>
+                <input type="text" id="quantity" class="quantity-value" value="1" readonly>
+                <button type="button" class="quantity-btn" onclick="incrementQuantity()">+</button>
+              </div>
+            </div>
+            
+            <div class="product-actions">
+              <button class="btn btn-primary add-to-cart-btn" onclick="handleAddToCart(${product.id})">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
               </button>
             </div>
           </div>
+          
+          <div class="product-meta">
+            <p><span>Category:</span> ${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</p>
+            ${product.weight ? `<p><span>Weight:</span> ${product.weight}</p>` : ''}
+            ${product.volume ? `<p><span>Volume:</span> ${product.volume}</p>` : ''}
+            ${product.origin ? `<p><span>Origin:</span> ${product.origin}</p>` : ''}
+            ${product.skinType ? `<p><span>Skin Type:</span> ${product.skinType}</p>` : ''}
+            ${product.organic ? `<p><span>Organic:</span> Yes</p>` : ''}
+            ${product.vegan ? `<p><span>Vegan:</span> Yes</p>` : ''}
+          </div>
+        </div>
+      `;
+      
+      // Update product detail section
+      document.getElementById('productDetail').innerHTML = productDetailHtml;
+      
+      // Update full description
+      document.getElementById('productFullDescription').innerHTML = product.fullDescription || product.description;
+      
+      // Load related products (simple demo - just show other products from same category)
+      loadRelatedProducts(product.category, product.id);
+    }
+    
+    // Load related products
+    function loadRelatedProducts(category, currentProductId) {
+      const relatedProducts = products
+        .filter(p => p.category === category && p.id !== currentProductId)
+        .slice(0, 4); // Show max 4 related products
+      
+      if (relatedProducts.length === 0) {
+        // If no products in same category, show any other products
+        relatedProducts.push(...products.filter(p => p.id !== currentProductId).slice(0, 4));
+      }
+      
+      const relatedProductsHtml = relatedProducts.map(product => {
+        // Format price in Indian Rupees
+        const formattedPrice = product.price.toLocaleString('en-IN');
+        
+        return `
+          <div class="product-card">
+            <a href="product.html?id=${product.id}" class="card-link"></a>
+            <div class="product-image">
+              <img src="${product.imageSrc}" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
+              <div class="product-badges">
+                ${product.isNew ? '<span class="badge badge-new">New</span>' : ''}
+                ${product.isBestSeller ? '<span class="badge badge-bestseller">Best Seller</span>' : ''}
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-category">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
+              <h3 class="product-title">${product.name}</h3>
+              <p class="product-description">${product.description}</p>
+              <div class="product-footer">
+                <div class="product-price"><span class="currency-symbol">₹</span>${formattedPrice}</div>
+                <button class="btn-add" onclick="handleAddToCart(event, ${product.id})">
+                  <i class="fas fa-shopping-cart"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
         `;
-        
-        // Make the whole card clickable
-        productCard.addEventListener('click', function() {
-          window.location.href = `product.html?id=${relatedProduct.id}`;
-        });
-        
-        relatedProductsContainer.appendChild(productCard);
-      });
-    }
-
-    // Call function to display product details
-    displayProductDetails();
-
-    // Function to open tab
-    function openTab(tabName) {
-      // Hide all tab contents
-      document.getElementById('description-tab').style.display = 'none';
-      document.getElementById('additional-tab').style.display = 'none';
-      document.getElementById('reviews-tab').style.display = 'none';
+      }).join('');
       
-      // Remove active class from all tab buttons
-      const tabButtons = document.querySelectorAll('.tab-button');
-      tabButtons.forEach(button => {
-        button.classList.remove('active');
-      });
-      
-      // Show the selected tab content and mark its button as active
-      document.getElementById(`${tabName}-tab`).style.display = 'block';
-      document.querySelector(`.tab-button[onclick="openTab('${tabName}')"]`).classList.add('active');
+      document.getElementById('relatedProducts').innerHTML = relatedProductsHtml;
     }
-
-    // Quantity functions
+    
+    // Change main product image
+    function changeMainImage(event, imageSrc, thumbnailElement) {
+      event.preventDefault();
+      document.getElementById('mainProductImage').src = imageSrc;
+      
+      // Update active thumbnail
+      document.querySelectorAll('.product-thumbnail').forEach(thumb => {
+        thumb.classList.remove('active');
+      });
+      thumbnailElement.classList.add('active');
+    }
+    
+    // Quantity controls
     function incrementQuantity() {
       const quantityInput = document.getElementById('quantity');
-      const currentValue = parseInt(quantityInput.value);
-      quantityInput.value = currentValue + 1;
+      const currentValue = parseInt(quantityInput.value, 10);
+      if (currentValue < 10) { // Set a reasonable maximum
+        quantityInput.value = currentValue + 1;
+      }
     }
-
+    
     function decrementQuantity() {
       const quantityInput = document.getElementById('quantity');
-      const currentValue = parseInt(quantityInput.value);
+      const currentValue = parseInt(quantityInput.value, 10);
       if (currentValue > 1) {
         quantityInput.value = currentValue - 1;
       }
     }
-
-    // Check if user is signed in
-    function isUserSignedIn() {
-      return localStorage.getItem('isSignedIn') === 'true';
-    }
-
-    // Add to cart function
-    function addToCart() {
+    
+    // Handle adding product to cart
+    function handleAddToCart(productId) {
       // Check if user is signed in
       if (!isUserSignedIn()) {
-        window.location.href = 'login.html';
+        showSigninModal();
         return;
       }
       
+      // Find the product
       const product = products.find(p => p.id === productId);
       if (!product) return;
       
-      const quantity = parseInt(document.getElementById('quantity').value);
+      // Get quantity
+      const quantity = parseInt(document.getElementById('quantity')?.value || 1, 10);
       
-      // Get existing cart items from localStorage or initialize empty array
-      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      // Get existing cart items
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
       
       // Check if product is already in cart
-      const existingItemIndex = existingCartItems.findIndex(item => item.id === productId);
+      const existingItemIndex = cartItems.findIndex(item => item.id === productId);
       
       if (existingItemIndex !== -1) {
-        // If product exists, update quantity
-        existingCartItems[existingItemIndex].quantity += quantity;
-        showAddedToCartNotification(`Updated ${product.name} quantity in cart`);
+        // Increase quantity if already in cart
+        cartItems[existingItemIndex].quantity += quantity;
       } else {
-        // Add new product to cart
-        existingCartItems.push({
+        // Add new item to cart
+        cartItems.push({
           id: product.id,
           name: product.name,
           price: product.price,
           quantity: quantity,
-          imageSrc: product.imageSrc,
+          imageSrc: product.imageSrc
         });
-        showAddedToCartNotification(`${product.name} added to cart successfully!`);
       }
       
       // Save updated cart to localStorage
-      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
       
       // Update cart count
       updateCartCount();
+      
+      // Show confirmation notification
+      showNotification(`${product.name} added to cart!`);
     }
-
-    // Add to cart from related products
-    function addToCartFromRelated(relatedProductId) {
-      // Check if user is signed in
-      if (!isUserSignedIn()) {
-        window.location.href = 'login.html';
-        return;
-      }
-      
-      const product = products.find(p => p.id === relatedProductId);
-      if (!product) return;
-      
-      // Get existing cart items from localStorage or initialize empty array
-      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-      
-      // Check if product is already in cart
-      const existingItemIndex = existingCartItems.findIndex(item => item.id === relatedProductId);
-      
-      if (existingItemIndex !== -1) {
-        // If product exists, increment quantity
-        existingCartItems[existingItemIndex].quantity += 1;
-        showAddedToCartNotification(`Updated ${product.name} quantity in cart`);
-      } else {
-        // Add new product to cart
-        existingCartItems.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          quantity: 1,
-          imageSrc: product.imageSrc,
+    
+    // Tab switching
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-button').forEach(btn => {
+          btn.classList.remove('active');
         });
-        showAddedToCartNotification(`${product.name} added to cart successfully!`);
+        
+        // Add active class to clicked button
+        this.classList.add('active');
+        
+        // Get the tab to show
+        const tabId = this.getAttribute('data-tab');
+        
+        // For demo, we just keep showing the description tab
+        // In a real application, you would toggle visibility of different tab contents
+      });
+    });
+    
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+    
+    // Show sign in modal
+    function showSigninModal() {
+      document.getElementById('signinOverlay').classList.add('show');
+      document.getElementById('signinRequired').classList.add('show');
+    }
+    
+    // Close sign in modal
+    function closeSigninModal() {
+      document.getElementById('signinOverlay').classList.remove('show');
+      document.getElementById('signinRequired').classList.remove('show');
+    }
+    
+    // Show notification
+    function showNotification(message) {
+      // Create notification element if it doesn't exist
+      let notification = document.getElementById('notification');
+      if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'notification';
+        notification.className = 'notification notification-success';
+        notification.innerHTML = `
+          <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-message"></div>
+          </div>
+          <button class="notification-close" onclick="this.parentNode.classList.remove('show')">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        document.body.appendChild(notification);
       }
       
-      // Save updated cart to localStorage
-      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
-      
-      // Update cart count
-      updateCartCount();
-    }
-
-    function showAddedToCartNotification(message) {
-      document.getElementById('cartNotificationMessage').textContent = message;
-      const notification = document.getElementById('addedToCartNotification');
+      // Update message and show
+      notification.querySelector('.notification-message').textContent = message;
       notification.classList.add('show');
       
-      // Auto hide after 3 seconds
+      // Auto-hide after 3 seconds
       setTimeout(() => {
-        hideNotification('addedToCartNotification');
+        notification.classList.remove('show');
       }, 3000);
     }
-
-    function hideNotification(id) {
-      const notification = document.getElementById(id);
-      notification.classList.remove('show');
-    }
-
-    // Update the cart count based on local storage
+    
+    // Update cart count
     function updateCartCount() {
       const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const count = cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -549,34 +531,40 @@
         element.textContent = count;
       });
     }
-
-    // Update sign in button
+    
+    // Update sign in button based on login status
     function updateSignInButton() {
       const signInButton = document.getElementById('signInButton');
-      const mobileSignInButton = document.getElementById('mobileSignInButton');
-      
       if (isUserSignedIn()) {
-        signInButton.textContent = 'Sign Out';
-        signInButton.href = '#';
-        signInButton.onclick = function(e) {
-          e.preventDefault();
+        signInButton.innerHTML = '<i class="fas fa-sign-out-alt"></i> Sign Out';
+        signInButton.href = 'javascript:void(0)';
+        signInButton.onclick = function() {
           localStorage.removeItem('isSignedIn');
-          location.reload();
+          updateSignInButton();
+          updateCartCount();
+          showNotification('Signed out successfully');
         };
-        
-        mobileSignInButton.textContent = 'Sign Out';
-        mobileSignInButton.href = '#';
-        mobileSignInButton.onclick = function(e) {
-          e.preventDefault();
-          localStorage.removeItem('isSignedIn');
-          location.reload();
-        };
+      } else {
+        signInButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        signInButton.href = 'login.html';
+        signInButton.onclick = null;
       }
     }
-
-    // Call on page load
-    updateCartCount();
-    updateSignInButton();
+    
+    // Mobile menu toggle
+    document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+    
+    // Set current year in footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', function() {
+      loadProductDetails();
+      updateCartCount();
+      updateSignInButton();
+    });
   </script>
 </body>
 </html>
