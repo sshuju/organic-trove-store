@@ -1,48 +1,45 @@
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 110 33% 98%;
+    --foreground: 110 10% 15%;
+    --muted: 110 10% 95%;
+    --muted-foreground: 110 5% 45%;
+    --primary: 142 64% 41%;
+    --primary-foreground: 0 0% 100%;
+    --organic-dark: 110 20% 18%;
+  }
 }
 
-body {
-  background: linear-gradient(184.1deg, rgba(220,255,200,1) 30%, rgba(188,245,165,1) 80%);
-  min-height: 100vh;
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur shadow-lg border border-white/20;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none py-2 px-4;
+  }
+
+  .btn-outline {
+    @apply border border-muted bg-transparent hover:bg-muted text-foreground inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none py-2 px-4;
+  }
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out forwards;
 }
 
-@keyframes logo-spin {
+@keyframes slide-up {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

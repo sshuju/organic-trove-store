@@ -55,6 +55,19 @@ const Navbar = () => {
     return localStorage.getItem('isSignedIn') === 'true';
   };
   
+  // Function to handle add to cart that requires sign in
+  const handleAddToCart = (event: React.MouseEvent) => {
+    if (!isUserSignedIn()) {
+      event.preventDefault();
+      event.stopPropagation();
+      // Show sign in required modal or redirect to login
+      navigate('/login');
+      toast.error('Please sign in to add products to cart');
+      return false;
+    }
+    return true;
+  };
+  
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -118,7 +131,11 @@ const Navbar = () => {
             <button className="rounded-full p-2 text-foreground hover:bg-muted transition-colors">
               <Search className="h-5 w-5" />
             </button>
-            <Link to="/cart" className="rounded-full p-2 text-foreground hover:bg-muted transition-colors relative">
+            <Link 
+              to="/cart" 
+              className="rounded-full p-2 text-foreground hover:bg-muted transition-colors relative"
+              onClick={handleAddToCart}
+            >
               <ShoppingCart className="h-5 w-5" />
               {cartItemCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -198,14 +215,14 @@ const Navbar = () => {
                   toast.success('Signed out successfully');
                   navigate('/');
                 }}
-                className="block py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
+                className="w-full py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
               >
                 Sign Out
               </button>
             ) : (
               <Link 
                 to="/login" 
-                className="block py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
+                className="w-full py-2 px-3 text-center rounded-md bg-primary text-primary-foreground"
               >
                 Sign In
               </Link>
