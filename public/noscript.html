@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco Store - Sustainable Products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <a href="index.html" class="logo"><span>Eco</span>Store</a>
+      <nav class="nav-desktop">
+        <a href="index.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="help.html">Help</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="cart.html" class="icon-button">
+          🛒
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Sustainable Living Made Simple</h1>
+        <p>Discover eco-friendly products that help you reduce waste and live more sustainably. Every small choice makes a big difference.</p>
+        <div class="hero-buttons">
+          <a href="products.html" class="btn btn-primary">Shop Now</a>
+          <a href="about.html" class="btn btn-outline">Learn More</a>
+        </div>
+        <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Eco-friendly products">
+        </div>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured Products</h2>
+          <p>Handpicked eco-friendly products to help you live more sustainably.</p>
+        </div>
+        <div class="product-grid">
+          <!-- Product 1 -->
+          <div class="product-card">
+            <a href="product-detail.html?id=1" class="card-link"></a>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Organic Turmeric Powder">
+              <div class="product-badges">
+                <span class="badge badge-bestseller">Best Seller</span>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Food & Spices</div>
+              <h3 class="product-title">Organic Turmeric Powder</h3>
+              <p class="product-description">100% organic turmeric powder rich in curcumin, grown without pesticides or chemicals.</p>
+              <div class="product-footer">
+                <div class="product-price">$1.99</div>
+                <button class="btn-add">+ Add</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 2 -->
+          <div class="product-card">
+            <a href="product-detail.html?id=2" class="card-link"></a>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Bamboo Toothbrush Set">
+              <div class="product-badges">
+                <span class="badge badge-new">New</span>
+              </div>
+            </div>
+            <div class="product-details">
+              <div class="product-category">Personal Care</div>
+              <h3 class="product-title">Bamboo Toothbrush Set</h3>
+              <p class="product-description">Eco-friendly bamboo toothbrushes with biodegradable handles and BPA-free bristles.</p>
+              <div class="product-footer">
+                <div class="product-price">$2.49</div>
+                <button class="btn-add">+ Add</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 3 -->
+          <div class="product-card">
+            <a href="product-detail.html?id=3" class="card-link"></a>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1594373505583-89a04f1e2dcd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Organic Coconut Oil">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Beauty & Wellness</div>
+              <h3 class="product-title">Organic Coconut Oil</h3>
+              <p class="product-description">Cold-pressed virgin coconut oil from certified organic coconuts.</p>
+              <div class="product-footer">
+                <div class="product-price">$3.49</div>
+                <button class="btn-add">+ Add</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product 4 -->
+          <div class="product-card">
+            <a href="product-detail.html?id=4" class="card-link"></a>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1584473457406-6240486418e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Zero Waste Starter Kit">
+            </div>
+            <div class="product-details">
+              <div class="product-category">Home & Living</div>
+              <h3 class="product-title">Zero Waste Starter Kit</h3>
+              <p class="product-description">Essential zero waste items including cotton bags, stainless steel straws, and more.</p>
+              <div class="product-footer">
+                <div class="product-price">$7.99</div>
+                <button class="btn-add">+ Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🌱</div>
+            <h3 class="feature-title">Sustainable</h3>
+            <p class="feature-description">All our products are chosen with sustainability in mind, minimizing environmental impact.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">♻️</div>
+            <h3 class="feature-title">Eco-Friendly</h3>
+            <p class="feature-description">We prioritize products made from recycled materials or that are easily recyclable.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3 class="feature-title">Ethical</h3>
+            <p class="feature-description">We ensure all products are ethically sourced and support fair labor practices.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3 class="feature-title">Minimal Packaging</h3>
+            <p class="feature-description">Our packaging is plastic-free and made from recycled or compostable materials.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3>Shop</h3>
+          <ul class="footer-links">
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="products.html?category=food">Food & Spices</a></li>
+            <li><a href="products.html?category=personal">Personal Care</a></li>
+            <li><a href="products.html?category=home">Home & Living</a></li>
+            <li><a href="products.html?category=beauty">Beauty & Wellness</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>About</h3>
+          <ul class="footer-links">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="about.html#values">Our Values</a></li>
+            <li><a href="about.html#sustainability">Sustainability</a></li>
+            <li><a href="about.html#certifications">Certifications</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Help</h3>
+          <ul class="footer-links">
+            <li><a href="help.html#faq">FAQ</a></li>
+            <li><a href="help.html#shipping">Shipping & Returns</a></li>
+            <li><a href="help.html#payment">Payment Options</a></li>
+            <li><a href="help.html#contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <ul class="footer-contact">
+            <li>
+              <span class="footer-contact-icon">📍</span>
+              <span class="footer-contact-text">123 Green Street, Earth City, EC 12345</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon">📞</span>
+              <span class="footer-contact-text">+1 (555) 123-4567</span>
+            </li>
+            <li>
+              <span class="footer-contact-icon">✉️</span>
+              <span class="footer-contact-text">hello@ecostore.com</span>
+            </li>
+          </ul>
+          <div class="footer-social">
+            <a href="#" class="social-icon">📱</a>
+            <a href="#" class="social-icon">📷</a>
+            <a href="#" class="social-icon">🐦</a>
+            <a href="#" class="social-icon">📝</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2023 EcoStore. All rights reserved.</div>
+        <div class="footer-legal">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Redirect to the React app
+    window.location.href = "index.html";
+  </script>
+</body>
+</html>
