@@ -333,6 +333,7 @@ header {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   position: relative;
+  cursor: pointer;
 }
 
 .product-card .card-link {
@@ -366,6 +367,14 @@ header {
   object-fit: contain;
   padding: 20px;
   background-color: #f8f8f8;
+}
+
+.fallback-image {
+  object-fit: contain;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  width: 100%;
+  height: 100%;
 }
 
 .product-card:hover .product-image img {
@@ -1519,3 +1528,4 @@ footer {
   width: 100%;
   height: 100%;
 }
+

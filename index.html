@@ -77,100 +77,8 @@
         <p>Our hand-picked selection of premium organic products</p>
       </div>
       
-      <div class="product-grid">
-        <!-- Product 1 -->
-        <div class="product-card">
-          <a href="product.html?id=1" class="card-link" aria-label="View Wild Forest Honey details"></a>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Honey" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
-            <div class="product-badges">
-              <span class="badge badge-new">New</span>
-            </div>
-          </div>
-          <div class="product-details">
-            <div class="product-category">Food & Beverages</div>
-            <h3 class="product-title">
-              <a href="product.html?id=1">Wild Forest Honey</a>
-            </h3>
-            <p class="product-description">100% pure, ethically sourced wild forest honey packed with natural goodness.</p>
-            <div class="product-footer">
-              <div class="product-price">₹450</div>
-              <button class="btn-add" onclick="showLoginNotification()">
-                <i class="fas fa-shopping-cart"></i>
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 2 -->
-        <div class="product-card">
-          <a href="product.html?id=2" class="card-link" aria-label="View Lavender Handmade Soap details"></a>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Organic Soap" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
-            <div class="product-badges">
-              <span class="badge badge-bestseller">Best Seller</span>
-            </div>
-          </div>
-          <div class="product-details">
-            <div class="product-category">Beauty & Personal Care</div>
-            <h3 class="product-title">
-              <a href="product.html?id=2">Lavender Handmade Soap</a>
-            </h3>
-            <p class="product-description">Handcrafted soap made with organic oils and pure lavender essential oil.</p>
-            <div class="product-footer">
-              <div class="product-price">₹250</div>
-              <button class="btn-add" onclick="showLoginNotification()">
-                <i class="fas fa-shopping-cart"></i>
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 3 -->
-        <div class="product-card">
-          <a href="product.html?id=3" class="card-link" aria-label="View Bamboo Toothbrush Set details"></a>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="Bamboo Toothbrush" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
-          </div>
-          <div class="product-details">
-            <div class="product-category">Home & Living</div>
-            <h3 class="product-title">
-              <a href="product.html?id=3">Bamboo Toothbrush Set</a>
-            </h3>
-            <p class="product-description">Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4.</p>
-            <div class="product-footer">
-              <div class="product-price">₹350</div>
-              <button class="btn-add" onclick="showLoginNotification()">
-                <i class="fas fa-shopping-cart"></i>
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 4 -->
-        <div class="product-card">
-          <a href="product.html?id=4" class="card-link" aria-label="View Herbal Tea Collection details"></a>
-          <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="Organic Tea" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('error');">
-          </div>
-          <div class="product-details">
-            <div class="product-category">Food & Beverages</div>
-            <h3 class="product-title">
-              <a href="product.html?id=4">Herbal Tea Collection</a>
-            </h3>
-            <p class="product-description">Premium collection of organic herbal teas from the Himalayan region.</p>
-            <div class="product-footer">
-              <div class="product-price">₹550</div>
-              <button class="btn-add" onclick="showLoginNotification()">
-                <i class="fas fa-shopping-cart"></i>
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="product-grid" id="featured-products">
+        <!-- Products will be added dynamically -->
       </div>
       
       <div class="text-center">
@@ -360,8 +268,73 @@
     </button>
   </div>
 
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  <!-- Added to cart notification -->
+  <div class="notification notification-success" id="addedToCartNotification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Product added to cart</div>
+      <div id="cartNotificationMessage"></div>
+    </div>
+    <button class="notification-close" onclick="hideNotification('addedToCartNotification')">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
   <script>
+    // Sample product data
+    const products = [
+      { id: 1, name: "Wild Forest Honey", price: 450, imageSrc: "https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Food & Beverages", isNew: true, description: "100% pure, ethically sourced wild forest honey packed with natural goodness." },
+      { id: 2, name: "Lavender Handmade Soap", price: 250, imageSrc: "https://images.unsplash.com/photo-1601026909329-a6636e2f7beb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80", category: "Beauty & Personal Care", isBestSeller: true, description: "Handcrafted soap made with organic oils and pure lavender essential oil." },
+      { id: 3, name: "Bamboo Toothbrush Set", price: 350, imageSrc: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80", category: "Home & Living", description: "Eco-friendly bamboo toothbrushes with soft BPA-free bristles. Pack of 4." },
+      { id: 4, name: "Herbal Tea Collection", price: 550, imageSrc: "https://images.unsplash.com/photo-1608591058033-3080bc865e60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80", category: "Food & Beverages", description: "Premium collection of organic herbal teas from the Himalayan region." },
+    ];
+
+    // Display featured products
+    function displayFeaturedProducts() {
+      const productsContainer = document.getElementById('featured-products');
+      productsContainer.innerHTML = '';
+      
+      products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
+          <div class="product-image">
+            <img src="${product.imageSrc}" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'; this.classList.add('fallback-image');">
+            <div class="product-badges">
+              ${product.isNew ? '<span class="badge badge-new">New</span>' : ''}
+              ${product.isBestSeller ? '<span class="badge badge-bestseller">Best Seller</span>' : ''}
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-category">${product.category}</div>
+            <h3 class="product-title">
+              <a href="product.html?id=${product.id}">${product.name}</a>
+            </h3>
+            <p class="product-description">${product.description}</p>
+            <div class="product-footer">
+              <div class="product-price">₹${product.price.toLocaleString()}</div>
+              <button class="btn-add" onclick="event.stopPropagation(); addToCart(${product.id})">
+                <i class="fas fa-shopping-cart"></i>
+                Add
+              </button>
+            </div>
+          </div>
+        `;
+        
+        // Make the whole card clickable
+        productCard.addEventListener('click', function() {
+          window.location.href = `product.html?id=${product.id}`;
+        });
+        
+        productsContainer.appendChild(productCard);
+      });
+    }
+
+    // Call on page load
+    displayFeaturedProducts();
+
     // Mobile menu toggle
     document.querySelector('.nav-mobile-toggle').addEventListener('click', function() {
       document.getElementById('mobileMenu').classList.toggle('open');
@@ -370,7 +343,59 @@
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Notification functions
+    // Check if user is signed in
+    function isUserSignedIn() {
+      return localStorage.getItem('isSignedIn') === 'true';
+    }
+
+    // Add to cart function
+    function addToCart(productId) {
+      // Check if user is signed in
+      if (!isUserSignedIn()) {
+        // Show login notification
+        const notification = document.getElementById('loginNotification');
+        notification.classList.add('show');
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+          hideNotification('loginNotification');
+        }, 3000);
+        return;
+      }
+      
+      // Get product details
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      
+      // Get existing cart items from localStorage or initialize empty array
+      const existingCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      
+      // Check if product is already in cart
+      const existingItemIndex = existingCartItems.findIndex(item => item.id === productId);
+      
+      if (existingItemIndex !== -1) {
+        // If product exists, increment quantity
+        existingCartItems[existingItemIndex].quantity += 1;
+        showAddedToCartNotification(`Increased ${product.name} quantity in cart`);
+      } else {
+        // Add new product to cart
+        existingCartItems.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          imageSrc: product.imageSrc,
+        });
+        showAddedToCartNotification(`${product.name} added to cart successfully!`);
+      }
+      
+      // Save updated cart to localStorage
+      localStorage.setItem('cartItems', JSON.stringify(existingCartItems));
+      
+      // Update cart count
+      updateCartCount();
+    }
+
     function showLoginNotification() {
       const notification = document.getElementById('loginNotification');
       notification.classList.add('show');
@@ -391,10 +416,35 @@
       }, 3000);
     }
 
+    function showAddedToCartNotification(message) {
+      document.getElementById('cartNotificationMessage').textContent = message;
+      const notification = document.getElementById('addedToCartNotification');
+      notification.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        hideNotification('addedToCartNotification');
+      }, 3000);
+    }
+
     function hideNotification(id) {
       const notification = document.getElementById(id);
       notification.classList.remove('show');
     }
+
+    // Update the cart count based on local storage
+    function updateCartCount() {
+      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const count = cartItems.reduce((total, item) => total + item.quantity, 0);
+      
+      const cartCountElements = document.querySelectorAll('.cart-count');
+      cartCountElements.forEach(element => {
+        element.textContent = count;
+      });
+    }
+
+    // Call on page load
+    updateCartCount();
 
     // Preload fallback image
     const fallbackImg = new Image();
