@@ -54,35 +54,152 @@ const allProducts = [
   }
 ];
 
+// Helper functions
+function formatIndianPrice(price) {
+  return '₹' + price.toLocaleString('en-IN');
+}
+
+function isUserSignedIn() {
+  return localStorage.getItem('isSignedIn') === 'true';
+}
+
+function checkSignIn(event) {
+  if (!isUserSignedIn()) {
+    event.preventDefault();
+    event.stopPropagation();
+    showSignInRequired();
+    return false;
+  }
+  return true;
+}
+
+function showSignInRequired() {
+  document.getElementById('signin-required').classList.add('show');
+  document.getElementById('signin-overlay').classList.add('show');
+}
+
+function hideSignInRequired() {
+  document.getElementById('signin-required').classList.remove('show');
+  document.getElementById('signin-overlay').classList.remove('show');
+}
+
+function signIn() {
+  localStorage.setItem('isSignedIn', 'true');
+  hideSignInRequired();
+  renderApp(); // Re-render to update UI
+}
+
+function signOut() {
+  localStorage.removeItem('isSignedIn');
+  renderApp(); // Re-render to update UI
+}
+
+function navigateTo(page) {
+  // Hide all pages
+  const pages = document.querySelectorAll('.page-container');
+  pages.forEach(page => page.style.display = 'none');
+  
+  // Show selected page
+  const selectedPage = document.getElementById(page + '-page');
+  if (selectedPage) {
+    selectedPage.style.display = 'block';
+  }
+  
+  // Update active state in navigation
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-page') === page) {
+      link.classList.add('active');
+    }
+  });
+  
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
+
 // Header Component
 function Header() {
+  const signedIn = isUserSignedIn();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   
   return React.createElement('header', null,
     React.createElement('div', { className: 'container header-container' },
       // Logo
-      React.createElement('a', { href: '#', className: 'logo' }, 
-        React.createElement('span', null, 'Eco'),
-        'Store'
+      React.createElement('a', { 
+        href: '#', 
+        className: 'logo',
+        onClick: (e) => {
+          e.preventDefault();
+          navigateTo('home');
+        }
+      }, 
+        React.createElement('span', null, 'Organic'),
+        'Trove'
       ),
       
       // Desktop Navigation
       React.createElement('nav', { className: 'nav-desktop' },
-        React.createElement('a', { href: '#', className: 'active' }, 'Home'),
-        React.createElement('a', { href: '#' }, 'Products'),
-        React.createElement('a', { href: '#' }, 'About'),
-        React.createElement('a', { href: '#' }, 'Help')
+        React.createElement('a', { 
+          href: '#', 
+          className: 'nav-link active',
+          'data-page': 'home',
+          onClick: (e) => {
+            e.preventDefault();
+            navigateTo('home');
+          }
+        }, 'Home'),
+        React.createElement('a', {
+          href: '#',
+          className: 'nav-link',
+          'data-page': 'products',
+          onClick: (e) => {
+            e.preventDefault();
+            navigateTo('products');
+          }
+        }, 'Products'),
+        React.createElement('a', {
+          href: '#',
+          className: 'nav-link',
+          'data-page': 'about',
+          onClick: (e) => {
+            e.preventDefault();
+            navigateTo('about');
+          }
+        }, 'About'),
+        React.createElement('a', {
+          href: '#',
+          className: 'nav-link',
+          'data-page': 'help',
+          onClick: (e) => {
+            e.preventDefault();
+            navigateTo('help');
+          }
+        }, 'Help')
       ),
       
       // Navigation Actions
       React.createElement('div', { className: 'nav-actions' },
         React.createElement('button', { 
           className: 'icon-button',
-          onClick: () => console.log('Cart clicked')
+          onClick: (e) => {
+            if (checkSignIn(e)) {
+              navigateTo('cart');
+            }
+          }
         }, 
           '🛒',
           React.createElement('span', { className: 'cart-count' }, '0')
         ),
+        signedIn ? 
+          React.createElement('button', {
+            className: 'btn btn-outline btn-desktop',
+            onClick: signOut
+          }, 'Sign Out') :
+          React.createElement('button', {
+            className: 'btn btn-outline btn-desktop',
+            onClick: () => navigateTo('login')
+          }, 'Sign In'),
         React.createElement('button', { 
           className: 'nav-mobile-toggle',
           onClick: () => setIsMenuOpen(!isMenuOpen)
@@ -94,11 +211,61 @@ function Header() {
     React.createElement('div', { 
       className: `nav-mobile ${isMenuOpen ? 'open' : ''}`,
     },
-      React.createElement('a', { href: '#', className: 'active' }, 'Home'),
-      React.createElement('a', { href: '#' }, 'Products'),
-      React.createElement('a', { href: '#' }, 'About'),
-      React.createElement('a', { href: '#' }, 'Help'),
-      React.createElement('a', { href: '#' }, 'Login')
+      React.createElement('a', { 
+        href: '#', 
+        className: 'nav-link active',
+        'data-page': 'home',
+        onClick: (e) => {
+          e.preventDefault();
+          navigateTo('home');
+          setIsMenuOpen(false);
+        }
+      }, 'Home'),
+      React.createElement('a', {
+        href: '#',
+        className: 'nav-link',
+        'data-page': 'products',
+        onClick: (e) => {
+          e.preventDefault();
+          navigateTo('products');
+          setIsMenuOpen(false);
+        }
+      }, 'Products'),
+      React.createElement('a', {
+        href: '#',
+        className: 'nav-link',
+        'data-page': 'about',
+        onClick: (e) => {
+          e.preventDefault();
+          navigateTo('about');
+          setIsMenuOpen(false);
+        }
+      }, 'About'),
+      React.createElement('a', {
+        href: '#',
+        className: 'nav-link',
+        'data-page': 'help',
+        onClick: (e) => {
+          e.preventDefault();
+          navigateTo('help');
+          setIsMenuOpen(false);
+        }
+      }, 'Help'),
+      signedIn ? 
+        React.createElement('button', {
+          className: 'btn btn-primary w-full mt-4',
+          onClick: () => {
+            signOut();
+            setIsMenuOpen(false);
+          }
+        }, 'Sign Out') :
+        React.createElement('button', {
+          className: 'btn btn-primary w-full mt-4',
+          onClick: () => {
+            navigateTo('login');
+            setIsMenuOpen(false);
+          }
+        }, 'Sign In')
     )
   );
 }
@@ -110,8 +277,14 @@ function Hero() {
       React.createElement('h1', null, 'Sustainable Living Made Simple'),
       React.createElement('p', null, 'Discover eco-friendly products that help you reduce waste and live more sustainably. Every small choice makes a big difference.'),
       React.createElement('div', { className: 'hero-buttons' },
-        React.createElement('button', { className: 'btn btn-primary' }, 'Shop Now'),
-        React.createElement('button', { className: 'btn btn-outline' }, 'Learn More')
+        React.createElement('button', { 
+          className: 'btn btn-primary',
+          onClick: () => navigateTo('products') 
+        }, 'Shop Now'),
+        React.createElement('button', { 
+          className: 'btn btn-outline',
+          onClick: () => navigateTo('about')
+        }, 'Learn More')
       ),
       React.createElement('div', { className: 'hero-image' },
         React.createElement('img', { 
@@ -135,6 +308,7 @@ function ProductCard({ product }) {
       className: 'card-link', 
       onClick: (e) => {
         e.preventDefault();
+        navigateTo('product');
         console.log('Product clicked:', product.name);
       }
     }),
@@ -157,12 +331,14 @@ function ProductCard({ product }) {
       React.createElement('h3', { className: 'product-title' }, product.name),
       React.createElement('p', { className: 'product-description' }, product.description),
       React.createElement('div', { className: 'product-footer' },
-        React.createElement('div', { className: 'product-price' }, `$${(product.price / 100).toFixed(2)}`),
+        React.createElement('div', { className: 'product-price' }, formatIndianPrice(product.price)),
         React.createElement('button', { 
           className: 'btn-add',
           onClick: (e) => {
             e.stopPropagation();
-            console.log('Add to cart:', product.name);
+            if (checkSignIn(e)) {
+              console.log('Add to cart:', product.name);
+            }
           }
         }, '+ Add')
       )
@@ -182,6 +358,24 @@ function ProductsSection() {
         allProducts.map(product => 
           React.createElement(ProductCard, { key: product.id, product: product })
         )
+      ),
+      React.createElement('div', { className: 'pagination' },
+        React.createElement('button', { 
+          className: 'pagination-button',
+          disabled: true
+        }, '← Previous'),
+        React.createElement('button', { 
+          className: 'pagination-button active'
+        }, '1'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, '2'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, '3'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, 'Next →')
       )
     )
   );
@@ -230,7 +424,13 @@ function Footer() {
         React.createElement('div', { className: 'footer-column' },
           React.createElement('h3', null, 'Shop'),
           React.createElement('ul', { className: 'footer-links' },
-            React.createElement('li', null, React.createElement('a', { href: '#' }, 'All Products')),
+            React.createElement('li', null, React.createElement('a', { 
+              href: '#',
+              onClick: (e) => {
+                e.preventDefault();
+                navigateTo('products');
+              }
+            }, 'All Products')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Food & Spices')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Personal Care')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Home & Living')),
@@ -242,7 +442,13 @@ function Footer() {
         React.createElement('div', { className: 'footer-column' },
           React.createElement('h3', null, 'About'),
           React.createElement('ul', { className: 'footer-links' },
-            React.createElement('li', null, React.createElement('a', { href: '#' }, 'Our Story')),
+            React.createElement('li', null, React.createElement('a', { 
+              href: '#',
+              onClick: (e) => {
+                e.preventDefault();
+                navigateTo('about');
+              }
+            }, 'Our Story')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Our Values')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Sustainability')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Certifications')),
@@ -254,7 +460,13 @@ function Footer() {
         React.createElement('div', { className: 'footer-column' },
           React.createElement('h3', null, 'Help'),
           React.createElement('ul', { className: 'footer-links' },
-            React.createElement('li', null, React.createElement('a', { href: '#' }, 'FAQ')),
+            React.createElement('li', null, React.createElement('a', { 
+              href: '#',
+              onClick: (e) => {
+                e.preventDefault();
+                navigateTo('help');
+              }
+            }, 'FAQ')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Shipping & Returns')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Payment Options')),
             React.createElement('li', null, React.createElement('a', { href: '#' }, 'Contact Us'))
@@ -271,11 +483,11 @@ function Footer() {
             ),
             React.createElement('li', null,
               React.createElement('span', { className: 'footer-contact-icon' }, '📞'),
-              React.createElement('span', { className: 'footer-contact-text' }, '+1 (555) 123-4567')
+              React.createElement('span', { className: 'footer-contact-text' }, '+91 98765 43210')
             ),
             React.createElement('li', null,
               React.createElement('span', { className: 'footer-contact-icon' }, '✉️'),
-              React.createElement('span', { className: 'footer-contact-text' }, 'hello@ecostore.com')
+              React.createElement('span', { className: 'footer-contact-text' }, 'hello@organictrove.com')
             )
           ),
           
@@ -290,7 +502,7 @@ function Footer() {
       
       // Footer bottom
       React.createElement('div', { className: 'footer-bottom' },
-        React.createElement('div', { className: 'footer-copyright' }, '© 2023 EcoStore. All rights reserved.'),
+        React.createElement('div', { className: 'footer-copyright' }, '© 2023 OrganicTrove. All rights reserved.'),
         React.createElement('div', { className: 'footer-legal' },
           React.createElement('a', { href: '#' }, 'Privacy Policy'),
           React.createElement('a', { href: '#' }, 'Terms of Service')
@@ -300,21 +512,206 @@ function Footer() {
   );
 }
 
+// About Page Component
+function AboutPage() {
+  return React.createElement('div', { id: 'about-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('h1', { className: 'text-3xl font-bold mb-6' }, 'About OrganicTrove'),
+      React.createElement('p', { className: 'mb-4' }, 'OrganicTrove is dedicated to bringing you the finest organic and sustainable products that are good for both you and the planet.'),
+      React.createElement('p', { className: 'mb-4' }, 'Our mission is to make sustainable living accessible to everyone. We carefully select each product in our store to ensure it meets our strict standards for quality, sustainability, and ethical production.'),
+      React.createElement('h2', { className: 'text-2xl font-bold mt-8 mb-4' }, 'Our Story'),
+      React.createElement('p', { className: 'mb-4' }, 'Founded in 2020, OrganicTrove began as a small online store with a handful of organic products. Today, we offer a wide range of sustainable options across multiple categories.')
+    )
+  );
+}
+
+// Help Page Component
+function HelpPage() {
+  return React.createElement('div', { id: 'help-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('h1', { className: 'text-3xl font-bold mb-6' }, 'Help & Support'),
+      React.createElement('h2', { className: 'text-2xl font-bold mb-4' }, 'Frequently Asked Questions'),
+      React.createElement('div', { className: 'mb-6' },
+        React.createElement('h3', { className: 'font-bold mb-2' }, 'What does organic really mean?'),
+        React.createElement('p', null, 'Organic refers to products grown without synthetic pesticides, fertilizers, genetically modified organisms, or ionizing radiation.')
+      ),
+      React.createElement('div', { className: 'mb-6' },
+        React.createElement('h3', { className: 'font-bold mb-2' }, 'How do you ship your products?'),
+        React.createElement('p', null, 'We use eco-friendly packaging materials and carbon-neutral shipping methods whenever possible.')
+      ),
+      React.createElement('div', { className: 'mb-6' },
+        React.createElement('h3', { className: 'font-bold mb-2' }, 'What is your return policy?'),
+        React.createElement('p', null, 'We offer a 30-day return policy for most items. Please contact our customer support for more details.')
+      )
+    )
+  );
+}
+
+// Login Page Component
+function LoginPage() {
+  return React.createElement('div', { id: 'login-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('div', { className: 'max-w-md mx-auto bg-white p-8 rounded shadow-md' },
+        React.createElement('h1', { className: 'text-2xl font-bold mb-6 text-center' }, 'Sign In'),
+        React.createElement('form', { 
+          onSubmit: (e) => {
+            e.preventDefault();
+            signIn();
+            navigateTo('home');
+          }
+        },
+          React.createElement('div', { className: 'mb-4' },
+            React.createElement('label', { className: 'block mb-2' }, 'Email'),
+            React.createElement('input', { 
+              type: 'email',
+              className: 'w-full border rounded p-2',
+              required: true
+            })
+          ),
+          React.createElement('div', { className: 'mb-6' },
+            React.createElement('label', { className: 'block mb-2' }, 'Password'),
+            React.createElement('input', { 
+              type: 'password',
+              className: 'w-full border rounded p-2',
+              required: true
+            })
+          ),
+          React.createElement('button', { 
+            type: 'submit',
+            className: 'btn btn-primary w-full'
+          }, 'Sign In')
+        ),
+        React.createElement('p', { className: 'mt-4 text-center' }, 'Don\'t have an account? ',
+          React.createElement('a', { href: '#', className: 'text-green-600' }, 'Sign Up')
+        )
+      )
+    )
+  );
+}
+
+// Cart Page Component
+function CartPage() {
+  return React.createElement('div', { id: 'cart-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('h1', { className: 'text-3xl font-bold mb-6' }, 'Your Cart'),
+      React.createElement('p', { className: 'text-center py-8' }, 'Your cart is empty.'),
+      React.createElement('div', { className: 'text-center' },
+        React.createElement('button', { 
+          className: 'btn btn-primary',
+          onClick: () => navigateTo('products')
+        }, 'Continue Shopping')
+      )
+    )
+  );
+}
+
+// Product Page Component
+function ProductPage() {
+  return React.createElement('div', { id: 'product-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('h1', { className: 'text-3xl font-bold mb-6' }, 'Product Details'),
+      React.createElement('p', { className: 'text-center py-8' }, 'Product information will be displayed here.'),
+      React.createElement('div', { className: 'text-center' },
+        React.createElement('button', { 
+          className: 'btn btn-primary',
+          onClick: () => navigateTo('products')
+        }, 'Back to Products')
+      )
+    )
+  );
+}
+
+// Products Page Component
+function ProductsPage() {
+  return React.createElement('div', { id: 'products-page', className: 'page-container', style: { display: 'none' } },
+    React.createElement('div', { className: 'container py-8' },
+      React.createElement('h1', { className: 'text-3xl font-bold mb-6' }, 'All Products'),
+      React.createElement('div', { className: 'product-grid mb-8' },
+        allProducts.map(product => 
+          React.createElement(ProductCard, { key: product.id, product: product })
+        )
+      ),
+      React.createElement('div', { className: 'pagination' },
+        React.createElement('button', { 
+          className: 'pagination-button',
+          disabled: true
+        }, '← Previous'),
+        React.createElement('button', { 
+          className: 'pagination-button active'
+        }, '1'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, '2'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, '3'),
+        React.createElement('button', { 
+          className: 'pagination-button'
+        }, 'Next →')
+      )
+    )
+  );
+}
+
+// SignIn Required Component
+function SignInRequired() {
+  return React.createElement('div', null,
+    React.createElement('div', { id: 'signin-overlay', className: 'signin-overlay', onClick: hideSignInRequired }),
+    React.createElement('div', { id: 'signin-required', className: 'signin-required' },
+      React.createElement('h3', { className: 'text-xl font-bold mb-2' }, 'Sign In Required'),
+      React.createElement('p', { className: 'mb-4' }, 'Please sign in to add products to your cart.'),
+      React.createElement('div', { className: 'flex space-x-4' },
+        React.createElement('button', { 
+          className: 'btn btn-outline flex-1',
+          onClick: hideSignInRequired
+        }, 'Cancel'),
+        React.createElement('button', { 
+          className: 'btn btn-primary flex-1',
+          onClick: () => {
+            hideSignInRequired();
+            navigateTo('login');
+          }
+        }, 'Sign In')
+      )
+    )
+  );
+}
+
+// Home Page Component (Main Page)
+function HomePage() {
+  return React.createElement('div', { id: 'home-page', className: 'page-container' },
+    React.createElement(Hero, null),
+    React.createElement(ProductsSection, null),
+    React.createElement(FeaturesSection, null)
+  );
+}
+
 // Main App Component
 function App() {
   return React.createElement('div', { className: 'app' },
     React.createElement(Header, null),
-    React.createElement('main', null,
-      React.createElement(Hero, null),
-      React.createElement(ProductsSection, null),
-      React.createElement(FeaturesSection, null)
-    ),
+    React.createElement(HomePage, null),
+    React.createElement(ProductsPage, null),
+    React.createElement(AboutPage, null),
+    React.createElement(HelpPage, null),
+    React.createElement(LoginPage, null),
+    React.createElement(CartPage, null),
+    React.createElement(ProductPage, null),
+    React.createElement(SignInRequired, null),
     React.createElement(Footer, null)
   );
 }
 
-// Render the App
-document.addEventListener('DOMContentLoaded', function() {
+// Initial render function
+function renderApp() {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(React.createElement(App));
+}
+
+// Render the App when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  renderApp();
+  
+  // Initialize to home page
+  navigateTo('home');
 });
